@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     //
-    public function logout() {
+    public function logout()
+    {
+        $user = auth()->user();
+        $user->setRememberToken(null); // This sets the token to null.
+        $user->save();
         auth()->logout();
-        return redirect('/')->with('success','You have successfully logged out');
+
+        return redirect('/')->with('success', 'You have successfully logged out');
     }
     public function showDashboard()
     {
@@ -19,19 +25,32 @@ class UserController extends Controller
     }
     public function login(Request $request)
     {
+        //dd($request->all());
         $outgoingFields = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required']
+            'password' => ['required'],
+            'remember' => ['nullable', 'boolean']
         ]);
+        $remember = $request->get('remember');
+
         if (
-            auth()->attempt(
+            Auth::attempt(
                 [
                     'email' => $outgoingFields['email'],
                     'password' => $outgoingFields['password']
-                ]
+                ],
+                $remember
             )
         ) {
             $request->session()->regenerate();
+
+            // If the user did NOT want to be remembered, clear the remember token.
+            if (!$remember) {
+                $user = auth()->user();
+                $user->setRememberToken(null);
+                $user->save();
+            }
+
             return redirect('/dashboard')->with('success', 'You have successfully logged in.');
         } else {
             return redirect('/login')->with('failure', 'Incorrect login attempt.');

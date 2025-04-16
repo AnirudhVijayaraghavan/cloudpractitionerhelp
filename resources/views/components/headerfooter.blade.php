@@ -1,17 +1,16 @@
 <x-commonhtml>
 
     <body class="flex flex-col min-h-screen font-inter bg-gray-50 text-gray-800">
-        <!-- Header (Responsive with Mobile Navigation) -->
         <header x-data="{ open: false }" class="bg-white shadow">
             <div class="container mx-auto px-6 py-4 flex items-center justify-between">
                 <div>
-                    <a class="text-2xl font-bold text-gray-800" href="/">
+                    <a wire:navigate class="text-2xl font-bold text-gray-800" href="/">
                         CloudPractitionerHelp
                     </a>
                 </div>
                 @auth
                     <nav class="flex flex-nowrap items-center space-x-2">
-                        <a href="{{ route('dashboard') }}"
+                        <a wire:navigate href="{{ route('dashboard') }}"
                             class="text-gray-600 hover:text-gray-800 text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 transition">
                             Dashboard
                         </a>
@@ -25,11 +24,11 @@
                     </nav>
                 @else
                     <nav class="flex flex-nowrap items-center space-x-2">
-                        <a href="{{ route('login') }}"
+                        <a wire:navigate href="{{ route('login') }}"
                             class="text-gray-600 hover:text-gray-800 text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 transition">
                             Login
                         </a>
-                        <a href="{{ route('register') }}"
+                        <a wire:navigate href="{{ route('register') }}"
                             class="text-gray-600 hover:text-gray-800 text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 transition">
                             Register
                         </a>
@@ -75,6 +74,7 @@
                 <p class="text-gray-600">&copy; {{ date('Y') }} CloudPractitionerHelp. All rights reserved.</p>
             </div>
         </footer>
+        <livewire:scripts />
     </body>
 
 </x-commonhtml>

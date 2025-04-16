@@ -11,10 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            //
-            $table->boolean('isPremium')->default(0);
-            $table->boolean('isAdmin')->default(0);
             
+            
+            $table->integer('credits')->default(2)->after('password');
         });
     }
 
@@ -25,8 +24,7 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('isPremium');
-            $table->dropColumn('isAdmin');
+            $table->dropColumn('credits');
         });
     }
 };

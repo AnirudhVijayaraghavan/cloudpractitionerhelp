@@ -55,9 +55,10 @@
                 </div>
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">
-                        <input id="remember_me" name="remember" type="checkbox"
+                        <input type="hidden" name="remember" value="0">
+                        <input id="remember" name="remember" type="checkbox" value="1"
                             class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="remember_me" class="ml-2 block text-sm">Remember me</label>
+                        <label for="remember" class="ml-2 block text-sm">Remember me</label>
                     </div>
                     {{-- <div class="text-sm">
                         <a href="{{ route('password.request') }}" class="font-medium text-blue-600 hover:text-blue-500">
@@ -74,7 +75,7 @@
             </form>
             <div class="text-center">
                 <p class="text-sm">
-                    Don't have an account? <a href="{{ route('register') }}"
+                    Don't have an account? <a wire:navigate href="{{ route('register') }}"
                         class="font-medium text-blue-600 hover:text-blue-500">Register</a>
                 </p>
             </div>

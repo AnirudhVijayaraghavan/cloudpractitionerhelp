@@ -1,5 +1,4 @@
 <x-headerfooter>
-    <!-- Hero Section -->
     <section class="bg-gradient-to-r from-blue-500 to-indigo-600">
         <div class="container mx-auto px-6 py-20 text-center">
             <h1 class="text-4xl md:text-6xl font-bold text-white">
@@ -9,7 +8,7 @@
                 Discover a new way to test your knowledge with AI-assisted quizzes designed just for you.
             </p>
             <div class="mt-8">
-                <a href="{{ route('register') }}"
+                <a wire:navigate href="{{ route('register') }}"
                     class="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-gray-100 transition">
                     Get Started
                 </a>
@@ -76,7 +75,7 @@
             <p class="mb-8 text-gray-600">
                 Choose a plan that fits your needs. Start with a free trial today!
             </p>
-            <a href="{{ route('register') }}"
+            <a wire:navigate href="{{ route('register') }}"
                 class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
                 Start Free Trial
             </a>
@@ -96,7 +95,4 @@
             </p>
         </div>
     </section>
-
-   
-
 </x-headerfooter>
