@@ -26,6 +26,24 @@
                 </a>
             </div>
 
+
+
+            <!-- Quick Links Card -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold mb-2">Quick Links</h2>
+                <ul class="list-disc list-inside text-gray-600">
+                    <li><a wire:navigate href="/quizzes-section/{{ auth()->user()->id }}"
+                            class="text-blue-600 hover:underline">View
+                            Your
+                            Quizzes</a></li>
+                    <li><a wire:navigate href="/profile/{{ auth()->user()->id }}"
+                            class="text-blue-600 hover:underline">Update
+                            Profile</a></li>
+                    <li><a wire:navigate href="{{ route('settings') }}"
+                            class="text-blue-600 hover:underline">Settings</a></li>
+                </ul>
+            </div>
+
             <!-- Educational Resources Card -->
             <div class="bg-white rounded-lg shadow-lg p-6">
                 <h2 class="text-xl font-semibold mb-2">Educational Resources</h2>
@@ -37,19 +55,6 @@
                     class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
                     Visit Education Center
                 </a>
-            </div>
-
-            <!-- Quick Links Card -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <h2 class="text-xl font-semibold mb-2">Quick Links</h2>
-                <ul class="list-disc list-inside text-gray-600">
-                    <li><a wire:navigate href="/quizzes-section/{{ auth()->user()->id }}" class="text-blue-600 hover:underline">View
-                            Your
-                            Quizzes</a></li>
-                    <li><a wire:navigate href="/profile/{{ auth()->user()->id }}" class="text-blue-600 hover:underline">Update
-                            Profile</a></li>
-                    <li><a wire:navigate href="{{ route('settings') }}" class="text-blue-600 hover:underline">Settings</a></li>
-                </ul>
             </div>
         </div>
     </main>

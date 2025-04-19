@@ -8,10 +8,18 @@
                 Discover a new way to test your knowledge with AI-assisted quizzes designed just for you.
             </p>
             <div class="mt-8">
-                <a wire:navigate href="{{ route('register') }}"
-                    class="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-gray-100 transition">
-                    Get Started
-                </a>
+                @auth
+                    <a wire:navigate href="{{ route('dashboard') }}"
+                        class="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-gray-100 transition">
+                        Visit Dashboard
+                    </a>
+                @else
+                    <a wire:navigate href="{{ route('register') }}"
+                        class="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-gray-100 transition">
+                        Get Started
+                    </a>
+                @endauth
+
             </div>
         </div>
     </section>
@@ -73,12 +81,20 @@
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl font-bold mb-8">Pricing</h2>
             <p class="mb-8 text-gray-600">
-                Choose a plan that fits your needs. Start with a free trial today!
+                We operate on a credit system. All users have access to 2 free credits, when they start out.
             </p>
-            <a wire:navigate href="{{ route('register') }}"
-                class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
-                Start Free Trial
-            </a>
+            @auth
+                <a wire:navigate href="{{ route('profile',auth()->user()->id) }}"
+                    class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
+                    Enable Premium
+                </a>
+            @else
+                <a wire:navigate href="{{ route('register') }}"
+                    class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
+                    Start Free Trial
+                </a>
+            @endauth
+
         </div>
     </section>
 

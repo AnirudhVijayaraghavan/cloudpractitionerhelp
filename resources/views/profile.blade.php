@@ -1,7 +1,7 @@
 <x-headerfooter>
     <div class="container mx-auto px-6 py-10">
         <h1 class="text-3xl font-bold mb-8">{{ $userData->name }}'s Profile</h1>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-8">
             <!-- Profile Information Card -->
             <div class="md:col-span-2 md:row-start-1 bg-white rounded-lg shadow p-6">
@@ -86,7 +86,25 @@
             </div>
 
             <!-- Premium Subscription Card -->
-            <div class="md:col-span-1 md:row-span-2 bg-white rounded-lg shadow p-6 flex flex-col">
+            <div class="md:col-span-1 md:row-span-2 bg-white rounded-lg shadow p-10 flex flex-col">
+                <h2 class="text-xl font-bold mb-4">Credits</h2>
+                <p class="text-gray-700 mb-4">
+                    Buy more credits, to continue taking on more tests:
+                </p>
+                <ul class="list-disc list-inside text-gray-700 mb-4 space-y-2">
+                    <li>You currently have: {{$userData->credits}} credits remaining.</li>
+                    <li>Generous offerings</li>
+                    <li>Priority Support</li>
+                    <li>No expiration of purchased credits</li>
+                </ul>
+                <p class="text-gray-700 mb-6">
+                    Our credit system is made to be affordable, with the learner in mind. Get studying!
+                </p>
+                <a wire:navigate href="{{ route('checkoutshow') }}"
+                    class="inline-block px-4 py-2 bg-green-500 text-white rounded-md shadow hover:bg-green-700 transition">
+                    Buy Credits
+                </a>
+                <hr class="m-5"/>
                 <h2 class="text-xl font-bold mb-4">Premium Subscription</h2>
                 <p class="text-gray-700 mb-4">
                     Upgrade to premium to unlock exclusive features, including:
@@ -100,7 +118,11 @@
                 <p class="text-gray-700 mb-6">
                     Enjoy a seamless learning experience and gain an edge with our premium tools.
                 </p>
-                <form method="POST" action="{{ route('dashboard') }}" class="mt-auto">
+                <a wire:navigate href="{{ route('checkoutshow') }}"
+                    class="inline-block px-4 py-2 bg-blue-500 text-white rounded-md shadow hover:bg-blue-700 transition">
+                    Coming soon!
+                </a>
+                {{-- <form method="POST" action="{{ route('dashboard') }}" class="mt-auto">
                     @csrf
                     @method('PUT')
                     <button type="submit"
@@ -111,7 +133,7 @@
                             Enable Premium
                         @endif
                     </button>
-                </form>
+                </form> --}}
             </div>
         </div>
     </div>

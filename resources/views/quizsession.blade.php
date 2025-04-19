@@ -1,13 +1,41 @@
-<x-headerfooter>
+<x-commonhtml>
     <main class="container mx-auto px-6 py-8">
+
         <!-- Header (Title and Timer) -->
         <header class="flex items-center justify-between border-b pb-4 mb-6">
-            <h1 class="text-3xl font-bold">Quiz Simulation</h1>
+            <h1 class="text-3xl font-bold">AWS CCP CLF-C02 Simulation</h1>
             <div id="timer" class="text-xl font-bold text-red-600">
-                Time Remaining: 60:00
+                Time Remaining: {{-- will be set by JS --}}
             </div>
         </header>
+        {{-- Notification Container --}}
+        @if (session()->has('success'))
+            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
+                class="fixed top-17 right-0 z-50 transform transition-all duration-300 ease-out bg-green-500 text-white rounded-lg shadow-lg px-6 py-4">
+                <div class="flex items-center">
+                    <div class="flex-1">
+                        {{ session('success') }}
+                    </div>
+                    <button @click="show = false" class="ml-4 text-2xl leading-none focus:outline-none">
+                        &times;
+                    </button>
+                </div>
+            </div>
+        @endif
 
+        @if (session()->has('failure'))
+            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
+                class="fixed top-17 right-0 z-50 transform transition-all duration-300 ease-out bg-red-500 text-white rounded-lg shadow-lg px-6 py-4">
+                <div class="flex items-center">
+                    <div class="flex-1">
+                        {{ session('failure') }}
+                    </div>
+                    <button @click="show = false" class="ml-4 text-2xl leading-none focus:outline-none">
+                        &times;
+                    </button>
+                </div>
+            </div>
+        @endif
         <div class="flex flex-col md:flex-row">
             <!-- Left Sidebar: Navigation Panel -->
             <aside class="md:w-1/4 mb-6 md:mb-0 md:mr-4">
@@ -81,11 +109,18 @@
         </div>
     </main>
 
+    {{-- Calculate remaining seconds server‐side --}}
+    {{-- @php
+        $start = \Carbon\Carbon::parse($quiz->started_at);
+        $endsAt = $start->copy()->addMinutes(90);
+        $remainingSeconds = max(0, $endsAt->diffInSeconds(\Carbon\Carbon::now()));
+    @endphp --}}
+
     <!-- Include SweetAlert2 from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Place the script in a wire:ignore wrapper so Livewire doesn't re-render it -->
-    <div wire:ignore>
+    <div>
         <script>
             // Flag for auto-submission due to time running out.
             let autoSubmitting = false;
@@ -107,24 +142,27 @@
             }
             showQuestion(currentIndex);
 
+            Swal.fire({
+                title: 'Before You Begin',
+                html: `
+            <ul style="text-align:left; line-height:1.5; margin:0; padding-left:1.2em;">
+              <li>Do <strong>not</strong> use your browser’s back or refresh buttons.</li>
+              <li>Switching tabs or windows will terminate your quiz.</li>
+              <li>You have <strong>90 minutes</strong> to finish.</li>
+            </ul>`,
+                icon: 'info',
+                confirmButtonText: 'I Understand',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            });
             // Replace confirm() with SweetAlert2 modal for the previous button.
             prevBtn.addEventListener('click', () => {
                 if (currentIndex > 0) {
                     currentIndex--;
                     showQuestion(currentIndex);
                 } else {
-                    Swal.fire({
-                        title: 'Confirm Exit',
-                        text: 'This is the first question. Do you really want to exit?',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: 'Yes, exit',
-                        cancelButtonText: 'Cancel'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            document.getElementById('quizForm').submit();
-                        }
-                    });
+                    currentIndex+=64;
+                    showQuestion(currentIndex);
                 }
             });
 
@@ -148,7 +186,8 @@
                                 behavior: 'smooth'
                             });
                         } else {
-                            document.getElementById('quizForm').submit();
+                            // formElement.removeEventListener('submit', submitHandler);
+                            formElement.submit();
                         }
                     });
                 }
@@ -214,8 +253,12 @@
             };
             formElement.addEventListener('submit', submitHandler);
 
-            // Timer: 60 minutes countdown (for testing, set to 10 seconds here).
+            // Timer: 90 minutes countdown (for testing, set to 10 seconds here).
             let totalTime = 30; // seconds (adjust as needed for production)
+            if (totalTime <= 0) {
+                // Time’s already over—submit immediately
+                formElement.submit();
+            }
             const timerDiv = document.getElementById('timer');
             const timerInterval = setInterval(() => {
                 if (totalTime <= 0) {
@@ -228,7 +271,7 @@
                     formElement.appendChild(hiddenInput);
 
                     Swal.fire({
-                        title: 'Time is Up!',
+                        title: 'Time Up!',
                         text: 'Your test will be submitted automatically.',
                         icon: 'info',
                         timer: 3000,
@@ -252,4 +295,4 @@
             });
         </script>
     </div>
-</x-headerfooter>
+</x-commonhtml>

@@ -7,10 +7,14 @@
 
         <!-- New Quiz Button -->
         <div class="mb-8 text-center">
-            <a wire:navigate href="{{ route('quizsession',$userQuizzesData->id) }}"
+            {{-- <a wire:navigate href="{{ route('quizsession', $userQuizzesData->id) }}"
                 class="inline-block px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
                 Start New Quiz
-            </a>
+            </a> --}}
+            <form action="{{ route('quizsession', auth()->user()->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="inline-block px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">Start New Quiz</button>
+            </form>
         </div>
 
         <!-- Quiz History Section -->
@@ -37,7 +41,9 @@
                                     <td class="px-4 py-2 text-sm text-gray-700">{{ $quiz->score }}%</td>
                                     <td class="px-4 py-2 text-sm text-gray-700">{{ $quiz->status }}</td>
                                     <td class="px-4 py-2 text-sm text-blue-600 hover:underline">
-                                        <a href="{{ route('quizdetailindividual',['id' => auth()->user()->id, 'quizID' => $quiz->id]) }}">View Details</a>
+                                        <a
+                                            href="{{ route('quizdetailindividual', ['id' => auth()->user()->id, 'quizID' => $quiz->id]) }}">View
+                                            Details</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PremiumController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
@@ -11,19 +12,39 @@ use App\Http\Controllers\EducationController;
 // Route::middleware(['auth'])->group(function () {
 
 // });
+Route::get('/checkout', [PremiumController::class, 'show'])
+    ->middleware('auth')->name('checkoutshow');
+Route::post('/checkout', [PremiumController::class, 'checkoutCredits'])
+    ->middleware('auth')->name('checkoutprocess');
+Route::get('/checkout/success', [PremiumController::class, 'success'])
+    ->middleware('auth')->name('checkoutsuccess');
+Route::get('/checkout/cancel', [PremiumController::class, 'cancel'])
+    ->middleware('auth')->name('checkoutcancel');
+// **No auth middleware** on the webhook so Stripe can call it
+Route::post('/stripe/webhook', [PremiumController::class, 'webhook'])
+    ->name('stripewebhook');
+
+
 
 // Education Center Routes - EducationController - Handles all things Education-section related.
 Route::get('/education-section', [EducationController::class, "showEducationSection"])->middleware('auth')->name('educationsection');
 
 
 // Quizzes Center Routes - QuizzesController - Handles all things Quiz-section related.
-Route::get('/quizzes-section/{id}/quiz/{quizID}', [QuizzesController::class, "viewSingleQuizDetails"])
+Route::get('/quizzes-section/{id}/quizdetail/{quizID}', [QuizzesController::class, "viewSingleQuizDetails"])
     ->middleware('auth')
     ->name('quizdetailindividual');
 Route::put('/quizzes-section/{id}/newquiz/{quizID}', [QuizzesController::class, "storeNewQuiz"])
     ->middleware('auth')
     ->name('quizsessionstore');
-Route::get('/quizzes-section/{id}/newquiz', [QuizzesController::class, "startNewQuiz"])->middleware('auth')->name('quizsession');
+Route::post('/quizzes-section/{id}/newquiz', [QuizzesController::class, 'startNewQuiz'])
+    ->middleware('auth')
+    ->name('quizsession');
+Route::get(
+    '/quizzes-section/{id}/quiz/{quizID}',
+    [QuizzesController::class, 'displayQuizSession']
+)->middleware('auth')->name('quizsessiondisplay');
+// Route::get('/quizzes-section/{id}/newquiz', [QuizzesController::class, "startNewQuiz"])->middleware('auth')->name('quizsession');
 Route::get('/quizzes-section/{id}', [QuizzesController::class, "showQuizzesSection"])->middleware('auth')->name('quizzessection');
 
 
@@ -56,3 +77,4 @@ Route::get('/', function () {
 // quiz - make with livewire - PArtially DONE
 // educational content - 
 // premium - 
+// admin - 

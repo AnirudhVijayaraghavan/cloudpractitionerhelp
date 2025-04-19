@@ -8,6 +8,7 @@ use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\QuizQuestions;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 
 class QuizzesController extends Controller
@@ -24,102 +25,129 @@ class QuizzesController extends Controller
             'quiz' => $quizID
         ]);
     }
-    protected function endTest(Request $request, Quizzes $quizID)
+    protected function endTest($isCheating, Request $request, Quizzes $quizID)
     {
-        if (!$request->has('auto_submit')) {
-            $request->validate([
-                'answers' => 'required|array'
+        if ($isCheating === 'y') {
+
+            $latestQuiz = auth()->user()->quizzes()->latest()->first();
+            if (!$latestQuiz || $quizID->id !== $latestQuiz->id) {
+                // Option: Abort with a 403 error if the quizID does not match the latest quiz.
+                $latestQuiz->update([
+                    'finished_at' => now(),
+                    'score' => 0,
+                    'status' => 'terminated',
+                ]);
+                foreach ($latestQuiz->quizQuestions as $quizQuestion) {
+
+                    // Update each QuizQuestion record with the user's answer and if it was correct.
+                    $quizQuestion->update([
+                        'user_answer' => "N/A",
+                        'is_correct' => false,
+                    ]);
+                    $quizQuestion->save();
+                }
+                return -1;
+            }
+            // Mark the quiz as completed and update finish time and score.
+            $quizID->update([
+                'finished_at' => now(),
+                'score' => 0,
+                'status' => 'terminated',
             ]);
+            foreach ($quizID->quizQuestions as $quizQuestion) {
+
+                // Update each QuizQuestion record with the user's answer and if it was correct.
+                $quizQuestion->update([
+                    'user_answer' => "N/A",
+                    'is_correct' => false,
+                ]);
+                $quizQuestion->save();
+            }
+            return 0;
         } else {
-            // For auto submission, if 'answers' is missing, provide an empty array.
-            $request->merge(['answers' => $request->input('answers', [])]);
-        }
-        $totalQuestions = $quizID->quizQuestions()->count();
-        $correctCount = 0;
+            if (!$request->has('auto_submit')) {
+                $request->validate([
+                    'answers' => 'required|array'
+                ]);
+            } else {
+                // For auto submission, if 'answers' is missing, provide an empty array.
+                $request->merge(['answers' => $request->input('answers', [])]);
+            }
+            $totalQuestions = $quizID->quizQuestions()->count();
+            $correctCount = 0;
 
-        foreach ($quizID->quizQuestions as $quizQuestion) {
-            $question = $quizQuestion->question;
-            $userAnswer = $request->input("answers.{$quizQuestion->id}");
+            foreach ($quizID->quizQuestions as $quizQuestion) {
+                $question = $quizQuestion->question;
+                $userAnswer = $request->input("answers.{$quizQuestion->id}");
 
-            $isCorrect = $userAnswer === $question->correct_answer;
-            if ($isCorrect) {
-                $correctCount++;
+                $isCorrect = $userAnswer === $question->correct_answer;
+                if ($isCorrect) {
+                    $correctCount++;
+                }
+
+                // Update each QuizQuestion record with the user's answer and if it was correct.
+                $quizQuestion->update([
+                    'user_answer' => $userAnswer,
+                    'is_correct' => $isCorrect,
+                ]);
+                $quizQuestion->save();
             }
 
-            // Update each QuizQuestion record with the user's answer and if it was correct.
-            $quizQuestion->update([
-                'user_answer' => $userAnswer,
-                'is_correct' => $isCorrect,
+            // Calculate the score as a percentage.
+            $score = $totalQuestions > 0 ? round(($correctCount / $totalQuestions) * 100, 2) : 0;
+
+            // Mark the quiz as completed and update finish time and score.
+            $quizID->update([
+                'finished_at' => now(),
+                'score' => $score,
+                'status' => 'completed',
             ]);
-            $quizQuestion->save();
+            return $score;
         }
-
-        // Calculate the score as a percentage.
-        $score = $totalQuestions > 0 ? round(($correctCount / $totalQuestions) * 100, 2) : 0;
-
-        // Mark the quiz as completed and update finish time and score.
-        $quizID->update([
-            'finished_at' => now(),
-            'score' => $score,
-            'status' => 'completed',
-        ]);
     }
     public function storeNewQuiz(User $id, Quizzes $quizID, Request $request)
     {
-        //dd($id->id, $quizID->id, $quizID->exists, $quizID->toArray(), $quizID->quizQuestions()->get());
-        $gateAuthorization = Gate::inspect('update',$quizID);
+        // return auth()->user()->quizzes()->latest()->first();
+        $gateAuthorization = Gate::inspect('update', $id);
         if ($gateAuthorization->denied()) {
-            $this->endTest($request, $quizID);
-            return redirect('dashboard')->with('failure', 'Unauthorized. The test has ended.');
-        }
-
-        // If this is a manual submission (no auto_submit flag),
-        // then require at least some answers.
-        if (!$request->has('auto_submit')) {
-            $request->validate([
-                'answers' => 'required|array'
-            ]);
-        } else {
-            // For auto submission, if 'answers' is missing, provide an empty array.
-            $request->merge(['answers' => $request->input('answers', [])]);
-        }
-
-
-        $totalQuestions = $quizID->quizQuestions()->count();
-        $correctCount = 0;
-
-        foreach ($quizID->quizQuestions as $quizQuestion) {
-            $question = $quizQuestion->question;
-            $userAnswer = $request->input("answers.{$quizQuestion->id}");
-
-            $isCorrect = $userAnswer === $question->correct_answer;
-            if ($isCorrect) {
-                $correctCount++;
+            $rc = $this->endTest('y', $request, $quizID);
+            if ($rc === 0) {
+                return redirect('dashboard')->with('failure', 'Unauthorized. The test has ended.');
+            } else if ($rc === -1) {
+                // to be edited.
+                return redirect('dashboard')->with('failure', 'Unauthorized. You cannot change the URL maliciously.');
             }
-
-            // Update each QuizQuestion record with the user's answer and if it was correct.
-            $quizQuestion->update([
-                'user_answer' => $userAnswer,
-                'is_correct' => $isCorrect,
-            ]);
-            $quizQuestion->save();
         }
-
-        // Calculate the score as a percentage.
-        $score = $totalQuestions > 0 ? round(($correctCount / $totalQuestions) * 100, 2) : 0;
-
-        // Mark the quiz as completed and update finish time and score.
-        $quizID->update([
-            'finished_at' => now(),
-            'score' => $score,
-            'status' => 'completed',
-        ]);
+        $latestQuiz = auth()->user()->quizzes()->latest()->first();
+        if (!$latestQuiz || $quizID->id !== $latestQuiz->id) {
+            $this->endTest('y', $request, $latestQuiz);
+            return redirect('dashboard')->with('failure', 'Unauthorized. Why try ?');
+        }
+        $score = $this->endTest('n', $request, $quizID);
         return redirect()->route('quizzessection', [$id->id])->with('success', "Quiz completed! Your score is {$score}%.");
 
     }
+    public function displayQuizSession(User $id, Quizzes $quizID)
+    {
+        // Gate: ensure $quiz->user_id === $user->id, status in‑progress, etc.
+        //Gate::authorize('view', $quiz);
+        $gateAuthorization = Gate::inspect('view', $id);
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
+        return view('quizsession', ['quiz' => $quizID]);
+    }
     public function startNewQuiz(User $id)
     {
-        $gateAuthorization = Gate::inspect('update', $id);
+        // If they already have an in-progress quiz, redirect them back to it.
+        $inProgress = $id->quizzes()->where('status', 'in-progress')->latest()->first();
+        if ($inProgress) {
+            //$this->endTest('n', $request, $latestQuiz);
+            return redirect()
+                ->route('quizsessiondisplay', ['id'=>$id->id,'quizID'=>$inProgress->id])
+                ->with('success', 'You already have an active quiz. Continue it instead of starting a new one.');
+        }
+        $gateAuthorization = Gate::inspect('view', $id);
         if ($gateAuthorization->denied()) {
             return back()->with('failure', 'Unauthorized.');
         }
@@ -137,7 +165,7 @@ class QuizzesController extends Controller
             ]);
 
             // Randomly select, for example, 10 questions from your question bank
-            $questions = Question::inRandomOrder()->limit(10)->get();
+            $questions = Question::inRandomOrder()->limit(65)->get();
 
             // Create associated QuizQuestion records
             foreach ($questions as $index => $question) {
@@ -150,9 +178,10 @@ class QuizzesController extends Controller
             // Refresh the quiz instance to reload relationships
             // $newQuiz->refresh();
             // Return the quiz session view with the newly created quiz
-            return view('quizsession', [
-                'quiz' => $newQuiz
-            ]);
+            // return view('quizsession', [
+            //     'quiz' => $newQuiz
+            // ]);
+            return redirect()->route('quizsessiondisplay', ['id'=>$id->id,'quizID'=>$newQuiz->id]);
         }
 
     }

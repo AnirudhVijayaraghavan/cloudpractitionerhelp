@@ -30,7 +30,7 @@ class UsersSeeder extends Seeder
             [
                 'name' => 'anirudhv2',
                 'email' => 'aniroxtausa@gmail.com',
-                'password' => 'Adadad@131313'
+                'password' => 'Asasas@121212'
             ]
         ];
 

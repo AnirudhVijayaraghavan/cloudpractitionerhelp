@@ -21,7 +21,7 @@ class Quizzes extends Model
     ];
 
     protected $dates = ['started_at', 'finished_at'];
-
+    
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
