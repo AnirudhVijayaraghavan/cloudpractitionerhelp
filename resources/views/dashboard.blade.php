@@ -51,7 +51,7 @@
                     Explore our curated collection of tutorials, guides, and articles to boost your skills and help you
                     excel.
                 </p>
-                <a wire:navigate href="/education-section"
+                <a wire:navigate href="{{ route('educationsection') }}"
                     class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
                     Visit Education Center
                 </a>

@@ -4,17 +4,29 @@
         <p class="text-gray-700 mb-6">
             Take a new quiz simulation or review your previous quiz attempts below.
         </p>
-
+        {{-- 1) Fallback warning, hidden by default --}}
+        <div id="no-js-warning"
+            class="bg-red-100 border border-red-400 text-red-800 px-4 py-3 rounded-lg mb-6 text-center"
+            style="display: none;">
+            <strong>JavaScript Required:</strong><br>
+            You must enable JavaScript in your browser to start and continue a quiz. Please refresh the page, if you think/know, your javascript is enabled.
+        </div>
         <!-- New Quiz Button -->
         <div class="mb-8 text-center">
             {{-- <a wire:navigate href="{{ route('quizsession', $userQuizzesData->id) }}"
                 class="inline-block px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
                 Start New Quiz
             </a> --}}
-            <form action="{{ route('quizsession', auth()->user()->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="inline-block px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">Start New Quiz</button>
-            </form>
+            <div id="js-form-wrapper">
+                <form action="{{ route('quizsession', auth()->user()->id) }}" method="POST">
+                    @csrf
+                    <!-- JS‑flag: default=0, script will set to 1 -->
+                    <input type="hidden" name="js_enabled" id="js_enabled" value="1">
+                    <button type="submit"
+                        class="inline-block px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">Start
+                        New Quiz</button>
+                </form>
+            </div>
         </div>
 
         <!-- Quiz History Section -->
@@ -52,5 +64,18 @@
                 </div>
             @endif
         </div>
+        {{-- 3) If JS is disabled, this CSS runs and hides the form + shows the warning --}}
+        <noscript>
+            <style>
+                #js-form-wrapper {
+                    display: none !important;
+                }
+
+                #no-js-warning {
+                    display: block !important;
+                }
+            </style>
+        </noscript>
     </main>
+
 </x-headerfooter>

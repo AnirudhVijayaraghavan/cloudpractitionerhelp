@@ -25,8 +25,8 @@ Route::post('/stripe/webhook', [PremiumController::class, 'webhook'])
     ->name('stripewebhook');
 
 
-
 // Education Center Routes - EducationController - Handles all things Education-section related.
+Route::get('/education-section/{track}', [EducationController::class, "showTrack"])->middleware('auth')->name('educationtrack');
 Route::get('/education-section', [EducationController::class, "showEducationSection"])->middleware('auth')->name('educationsection');
 
 
@@ -76,5 +76,6 @@ Route::get('/', function () {
 // set up dashboard page - DONE
 // quiz - make with livewire - PArtially DONE
 // educational content - 
-// premium - 
+// premium - Partially DONE (added test version credits, need to do premium, and production version of both)
 // admin - 
+// quizsessiondisplay route: must add middleware to ensure it cannot be called or display from address bar

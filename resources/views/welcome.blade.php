@@ -5,7 +5,8 @@
                 Clearing the AWS CCP exam is hard. <br /> We've made it easy.
             </h1>
             <p class="mt-6 text-lg text-blue-100">
-                Discover a new way to test your knowledge with AI-assisted quizzes designed just for you.
+                Elevate your knowledge with ultra-affordable quizzes, and free learning content to help you clear and
+                get certified!
             </p>
             <div class="mt-8">
                 @auth
@@ -28,75 +29,125 @@
     <section id="features" class="container mx-auto px-6 py-16">
         <h2 class="text-3xl font-bold text-center mb-12">Features</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-lg shadow p-6">
-                <div class="mb-4">
-                    <!-- Example icon (you can replace with your own) -->
-                    <svg class="h-12 w-12 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 20l-5.447-2.724A2 2 0 013 15.382V6a2 2 0 012-2h14a2 2 0 012 2v9.382a2 2 0 01-1.553 1.894L15 20m0 0v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6m8 0h-4">
-                        </path>
-                    </svg>
+
+            <!-- Card 1: Smart Generation -->
+            <div
+                class="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 transform hover:scale-105 transition duration-300 group">
+                <div class="bg-blue-100 rounded-full p-4 inline-flex mb-4 group-hover:bg-blue-200 transition-colors">
+                    <img src="{{ asset('icons8-quiz-50.png') }}" />
                 </div>
-                <h3 class="text-xl font-semibold mb-2">Smart Generation</h3>
+                <h3 class="text-xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">Quiz Simulation Mode
+                </h3>
                 <p class="text-gray-600">
-                    AI-powered quiz generation that tailors questions to your learning progress.
+                    AI‑powered question creation that adapts to your strengths and weaknesses in real‑time.
                 </p>
             </div>
-            <div class="bg-white rounded-lg shadow p-6">
-                <div class="mb-4">
-                    <svg class="h-12 w-12 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M13 16h-1v-4h-1m1 4v-4m2 4h1v-4h-1m-2 0h1m1 0v-4a4 4 0 00-8 0v4a4 4 0 01-4 4h16a4 4 0 01-4-4z">
-                        </path>
-                    </svg>
+
+            <!-- Card 2: Question Bookmarking -->
+            <div
+                class="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 transform hover:scale-105 transition duration-300 group">
+                <div
+                    class="bg-indigo-100 rounded-full p-4 inline-flex mb-4 group-hover:bg-indigo-200 transition-colors">
+                    <img src="{{ asset('icons8-education-50.png') }}" />
                 </div>
-                <h3 class="text-xl font-semibold mb-2">Real-Time Feedback</h3>
+                <h3 class="text-xl font-semibold mb-2 group-hover:text-indigo-600 transition-colors">Free Educational
+                    Content</h3>
                 <p class="text-gray-600">
-                    Instant insights and analysis to help you improve while you learn.
+                    Our education section is free for everyone, and even includes some practice quizzes.
                 </p>
             </div>
-            <div class="bg-white rounded-lg shadow p-6">
-                <div class="mb-4">
-                    <svg class="h-12 w-12 text-blue-600" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 8c-1.657 0-3 1.567-3 3.5S10.343 15 12 15s3-1.567 3-3.5S13.657 8 12 8z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M19.5 12.5C19.5 17.194 16.194 21 12 21S4.5 17.194 4.5 12.5 7.806 4 12 4s7.5 3.806 7.5 8.5z">
-                        </path>
-                    </svg>
+
+            <!-- Card 3: Performance Analytics -->
+            <div
+                class="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 transform hover:scale-105 transition duration-300 group">
+                <div
+                    class="bg-purple-100 rounded-full p-4 inline-flex mb-4 group-hover:bg-purple-200 transition-colors">
+                    <img src="{{ asset('icons8-performance-goal-48.png') }}" />
                 </div>
-                <h3 class="text-xl font-semibold mb-2">Adaptive Learning</h3>
+                <h3 class="text-xl font-semibold mb-2 group-hover:text-purple-600 transition-colors">Performance
+                    Analytics</h3>
                 <p class="text-gray-600">
-                    A personalized experience that evolves with your skills and progress.
+                    Deep‑dive dashboards track your progress over time—spot trends, strengths, and areas to improve.
                 </p>
             </div>
+
         </div>
     </section>
 
     <!-- Pricing / Call-to-Action Section -->
-    <section id="pricing" class="bg-gray-100 py-16">
+    <section id="pricing" class="bg-gray-50 py-16">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold mb-8">Pricing</h2>
-            <p class="mb-8 text-gray-600">
-                We operate on a credit system. All users have access to 2 free credits, when they start out.
+            <h2 class="text-3xl font-bold mb-4">Choose Your Plan</h2>
+            <p class="mb-12 text-gray-600">
+                All new users start with <strong>2 free credits</strong>. Pick a plan below to continue your AWS CCP
+                prep.
             </p>
-            @auth
-                <a wire:navigate href="{{ route('profile',auth()->user()->id) }}"
-                    class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
-                    Enable Premium
-                </a>
-            @else
-                <a wire:navigate href="{{ route('register') }}"
-                    class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
-                    Start Free Trial
-                </a>
-            @endauth
 
+            <div class="grid gap-8 md:grid-cols-2">
+
+                <!-- Card: Pay‑As‑You‑Go Credits -->
+                <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 flex flex-col">
+                    <div class="mb-6">
+                        <img src="{{ asset('icons8-saving-64.png') }}" class="h-12 w-12 mx-auto"/>
+
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Pay‑As‑You‑Go Credits</h3>
+                    <p class="text-gray-600 mb-6 flex-1">
+                        Purchase credits in flexible bundles—only pay for what you use, when you need it.
+                    </p>
+                    <ul class="text-gray-600 mb-6 space-y-2 text-center mx-auto">
+                        <li>2 credits for $1</li>
+                        <li>5 credits for $2</li>
+                        <li>10 credits for $4</li>
+                        <li>20 credits for $10</li>
+                    </ul>
+                    @auth
+                        <a href="{{ route('checkoutshow') }}"
+                            class="mt-auto self-center inline-block px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
+                            Buy Credits
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="mt-auto self-center inline-block px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition">
+                            Log in to Buy
+                        </a>
+                    @endauth
+                </div>
+
+                <!-- Card: Premium Subscription -->
+                <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 flex flex-col">
+                    <div class="mb-6">
+                        <img src="{{ asset('icons8-premium-membership-48.png') }}" class="h-12 w-12 mx-auto"/>
+
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-2">Premium Subscription</h3>
+                    <p class="text-gray-600 mb-6 flex-1">
+                        Unlock unlimited quizzes, advanced analytics, and personalized learning paths—all for one low
+                        monthly rate.
+                    </p>
+                    <ul class="text-gray-600 mb-6 space-y-2 text-center mx-auto">
+                        <li>Unlimited quiz attempts</li>
+                        <li>In‑depth performance dashboards</li>
+                        <li>Personalized study recommendations</li>
+                    </ul>
+                    @auth
+                        <a href="{{ route('profile', auth()->id()) }}"
+                            class="mt-auto self-center inline-block px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition">
+                            Enable Premium
+                        </a>
+                    @else
+                        <a href="{{ route('register') }}"
+                            class="mt-auto self-center inline-block px-8 py-3 bg-purple-600 text-white rounded-full font-semibold hover:bg-purple-700 transition">
+                            Start Free Trial
+                        </a>
+                    @endauth
+                </div>
+
+            </div>
         </div>
     </section>
+
+
 
     <!-- About Section -->
     <section id="about" class="container mx-auto px-6 py-16">

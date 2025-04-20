@@ -137,14 +137,18 @@ class QuizzesController extends Controller
         }
         return view('quizsession', ['quiz' => $quizID]);
     }
-    public function startNewQuiz(User $id)
+    public function startNewQuiz(Request $request, User $id)
     {
+        // 1) Reject if JS flag wasn’t set
+        if ((int) $request->input('js_enabled', 0) !== 1) {
+            return back()->with('failure', 'You must have JavaScript enabled to start a quiz.');
+        }
         // If they already have an in-progress quiz, redirect them back to it.
         $inProgress = $id->quizzes()->where('status', 'in-progress')->latest()->first();
         if ($inProgress) {
             //$this->endTest('n', $request, $latestQuiz);
             return redirect()
-                ->route('quizsessiondisplay', ['id'=>$id->id,'quizID'=>$inProgress->id])
+                ->route('quizsessiondisplay', ['id' => $id->id, 'quizID' => $inProgress->id])
                 ->with('success', 'You already have an active quiz. Continue it instead of starting a new one.');
         }
         $gateAuthorization = Gate::inspect('view', $id);
@@ -181,7 +185,7 @@ class QuizzesController extends Controller
             // return view('quizsession', [
             //     'quiz' => $newQuiz
             // ]);
-            return redirect()->route('quizsessiondisplay', ['id'=>$id->id,'quizID'=>$newQuiz->id]);
+            return redirect()->route('quizsessiondisplay', ['id' => $id->id, 'quizID' => $newQuiz->id]);
         }
 
     }
