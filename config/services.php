@@ -35,7 +35,11 @@ return [
         ],
     ],
     'stripe' => [
-      'key'    => env('STRIPE_KEY'),
-      'secret' => env('STRIPE_SECRET'),
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+    ],
+    'openai' => [
+        'key' => env('OPENAI_API_KEY'),
+        'organization' => env('OPENAI_ORGANIZATION'),
     ],
 ];

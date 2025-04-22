@@ -12,6 +12,7 @@ use App\Http\Controllers\EducationController;
 // Route::middleware(['auth'])->group(function () {
 
 // });
+// Payment / Credits / Premium related routes - Handles all things payment related.
 Route::get('/checkout', [PremiumController::class, 'show'])
     ->middleware('auth')->name('checkoutshow');
 Route::post('/checkout', [PremiumController::class, 'checkoutCredits'])

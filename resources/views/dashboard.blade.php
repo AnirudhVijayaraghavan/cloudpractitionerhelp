@@ -39,8 +39,8 @@
                     <li><a wire:navigate href="/profile/{{ auth()->user()->id }}"
                             class="text-blue-600 hover:underline">Update
                             Profile</a></li>
-                    <li><a wire:navigate href="{{ route('settings') }}"
-                            class="text-blue-600 hover:underline">Settings</a></li>
+                    <li><a wire:navigate href="{{ route('checkoutshow') }}"
+                            class="text-blue-600 hover:underline">Buy More Credits</a></li>
                 </ul>
             </div>
 
