@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+        $middleware->alias([
+            'stopMaliciousSession' => \App\Http\Middleware\StopMaliciousQuizSession::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

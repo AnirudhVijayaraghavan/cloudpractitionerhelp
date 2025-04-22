@@ -254,7 +254,7 @@
             formElement.addEventListener('submit', submitHandler);
 
             // Timer: 90 minutes countdown (for testing, set to 10 seconds here).
-            let totalTime = 30; // seconds (adjust as needed for production)
+            let totalTime = 60; // seconds (adjust as needed for production)
             if (totalTime <= 0) {
                 // Time’s already over—submit immediately
                 formElement.submit();

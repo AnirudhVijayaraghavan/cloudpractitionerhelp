@@ -43,7 +43,7 @@ Route::post('/quizzes-section/{id}/newquiz', [QuizzesController::class, 'startNe
 Route::get(
     '/quizzes-section/{id}/quiz/{quizID}',
     [QuizzesController::class, 'displayQuizSession']
-)->middleware('auth')->name('quizsessiondisplay');
+)->middleware(['auth','stopMaliciousSession'])->name('quizsessiondisplay');
 // Route::get('/quizzes-section/{id}/newquiz', [QuizzesController::class, "startNewQuiz"])->middleware('auth')->name('quizsession');
 Route::get('/quizzes-section/{id}', [QuizzesController::class, "showQuizzesSection"])->middleware('auth')->name('quizzessection');
 
