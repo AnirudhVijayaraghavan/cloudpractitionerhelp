@@ -1,14 +1,16 @@
 <x-headerfooter>
     <main class="container mx-auto px-6 py-8">
         {{-- Hero --}}
-        <h1 class="text-3xl font-bold mb-2">AWS Certified Cloud Practitioner (CLF‑C02)</h1>
+        <h1 class="text-3xl font-bold mb-2">
+            {{ Request::segment(2) == 'aws-ccp' ? 'AWS Certified Cloud Practitioner (CLF‑C02)' : 'AWS Solutions Architect (SAA‑C03)' }}
+        </h1>
         <p class="text-gray-700 mb-8">
             This track will guide you through all the essential topics for the AWS CCP exam, from core concepts to
             practice quizzes.
         </p>
 
         {{-- Articles Grid --}}
-        @if ($articles->isEmpty())
+        {{-- @if ($articles->isEmpty())
             <p class="text-center text-gray-600">Coming soon! We’re assembling the best CCP materials for you.</p>
         @else
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -25,6 +27,6 @@
                     </div>
                 @endforeach
             </div>
-        @endif
+        @endif --}}
     </main>
 </x-headerfooter>

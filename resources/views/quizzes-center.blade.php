@@ -9,7 +9,8 @@
             class="bg-red-100 border border-red-400 text-red-800 px-4 py-3 rounded-lg mb-6 text-center"
             style="display: none;">
             <strong>JavaScript Required:</strong><br>
-            You must enable JavaScript in your browser to start and continue a quiz. Please refresh the page, if you think/know, your javascript is enabled.
+            You must enable JavaScript in your browser to start and continue a quiz. Please refresh the page, if you
+            think/know, your javascript is enabled.
         </div>
         <!-- New Quiz Button -->
         <div class="mb-8 text-center">
@@ -28,10 +29,11 @@
                 </form>
             </div>
         </div>
-
+        
         <!-- Quiz History Section -->
         <div>
             <h2 class="text-2xl font-semibold mb-4">Your Quiz History at a glance, {{ $userQuizzesData->name }}</h2>
+            <div class="mt-5 mb-5">{{ $quizzes->links() }}</div>
             @if ($quizzes->isEmpty())
                 <p class="text-gray-600">You haven't taken any quizzes yet. Start your first quiz now!</p>
             @else

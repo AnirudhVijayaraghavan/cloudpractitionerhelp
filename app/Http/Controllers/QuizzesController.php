@@ -191,7 +191,7 @@ class QuizzesController extends Controller
     }
     public function showQuizzesSection(User $id)
     {
-        $quizzes = $id->quizzes()->get();
+        $quizzes = $id->quizzes()->latest();
 
         $gateAuthorization = Gate::inspect('view', $id);
         if ($gateAuthorization->denied()) {
@@ -199,7 +199,7 @@ class QuizzesController extends Controller
         } else {
             return view('quizzes-center', [
                 'userQuizzesData' => $id,
-                'quizzes' => $quizzes
+                'quizzes' => $quizzes->paginate(10)
             ]);
         }
     }

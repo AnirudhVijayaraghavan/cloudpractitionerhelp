@@ -23,7 +23,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
-
+    <!-- Tailwind and other global CSS… -->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    
     <livewire:styles />
 </head>
 {{ $slot }}
