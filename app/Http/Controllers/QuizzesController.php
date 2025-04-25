@@ -131,6 +131,9 @@ class QuizzesController extends Controller
     {
         // Gate: ensure $quiz->user_id === $user->id, status in‑progress, etc.
         //Gate::authorize('view', $quiz);
+        if ($quizID->status !== 'in-progress') {
+            return back()->with('failure', 'Quiz session {$quizID->status}.');
+        }
         $gateAuthorization = Gate::inspect('view', $id);
         if ($gateAuthorization->denied()) {
             return back()->with('failure', 'Unauthorized.');

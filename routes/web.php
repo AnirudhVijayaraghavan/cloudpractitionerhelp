@@ -27,6 +27,7 @@ Route::post('/stripe/webhook', [PremiumController::class, 'webhook'])
 
 
 // Education Center Routes - EducationController - Handles all things Education-section related.
+Route::get('/education-section/{track}/{article}',[EducationController::class, "showArticle"])->middleware('auth')->name('educationarticle');
 Route::get('/education-section/{track}', [EducationController::class, "showTrack"])->middleware('auth')->name('educationtrack');
 Route::get('/education-section', [EducationController::class, "showEducationSection"])->middleware('auth')->name('educationsection');
 

@@ -17,14 +17,21 @@ class StopMaliciousQuizSession
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
+
         if ($request->route('id')->id !== auth()->id()) {
-            return redirect('dashboard')->with('failure', 'Unauthorized, bad user, why try ? from middleware');
+            return redirect('dashboard')->with('failure', 'Unauthorized.');
         }
         $latestQuiz = $request->route('id')->quizzes()->latest()->first();
         if (($request->route('quizID')->id !== $latestQuiz->id) || ($latestQuiz->status !== 'in-progress')) {
-            return redirect('dashboard')->with('failure', 'Unauthorized, bad quiz, why try ? from middleware');
+            return redirect('dashboard')->with('failure', 'Unauthorized.');
         }
-        return $next($request);
+        // Let the request go through...
+        $response = $next($request);
+
+        // ...but tell the browser not to cache it
+        return $response
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', 'Thu, 01 Jan 1970 00:00:00 GMT');
     }
 }

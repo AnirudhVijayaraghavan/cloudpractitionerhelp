@@ -29,6 +29,7 @@ class SetupDatabase extends Command
         $this->call('migrate:fresh');
         $this->call('db:seed', ['--class' => 'QuestionsSeeder']);
         $this->call('db:seed', ['--class' => 'UsersSeeder']);
+        $this->call('db:seed',['--class' => 'ArticleSeeder']);
         $this->info('Database setup complete!');
     }
 }
