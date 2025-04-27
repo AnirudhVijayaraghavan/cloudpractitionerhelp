@@ -42,4 +42,9 @@ return [
         'key' => env('OPENAI_API_KEY'),
         'organization' => env('OPENAI_ORGANIZATION'),
     ],
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => env('GITHUB_CLIENT_REDIRECT_URL'),
+    ],
 ];

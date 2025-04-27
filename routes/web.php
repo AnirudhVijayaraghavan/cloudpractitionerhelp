@@ -27,7 +27,7 @@ Route::post('/stripe/webhook', [PremiumController::class, 'webhook'])
 
 
 // Education Center Routes - EducationController - Handles all things Education-section related.
-Route::get('/education-section/{track}/{article}',[EducationController::class, "showArticle"])->middleware('auth')->name('educationarticle');
+Route::get('/education-section/{track}/{article}', [EducationController::class, "showArticle"])->middleware('auth')->name('educationarticle');
 Route::get('/education-section/{track}', [EducationController::class, "showTrack"])->middleware('auth')->name('educationtrack');
 Route::get('/education-section', [EducationController::class, "showEducationSection"])->middleware('auth')->name('educationsection');
 
@@ -45,7 +45,7 @@ Route::post('/quizzes-section/{id}/newquiz', [QuizzesController::class, 'startNe
 Route::get(
     '/quizzes-section/{id}/quiz/{quizID}',
     [QuizzesController::class, 'displayQuizSession']
-)->middleware(['auth','stopMaliciousSession'])->name('quizsessiondisplay');
+)->middleware(['auth', 'stopMaliciousSession'])->name('quizsessiondisplay');
 // Route::get('/quizzes-section/{id}/newquiz', [QuizzesController::class, "startNewQuiz"])->middleware('auth')->name('quizsession');
 Route::get('/quizzes-section/{id}', [QuizzesController::class, "showQuizzesSection"])->middleware('auth')->name('quizzessection');
 
@@ -61,6 +61,8 @@ Route::get('/profile/{id}', [ProfileController::class, "showProfile"])->middlewa
 
 
 // Basic Routes - UserController - Handles Authentication, Registry, Landing page.
+Route::get('/auth/sign-in/github/redirect', [UserController::class, "githubRedirect"])->middleware('guest');
+Route::get('/auth/sign-in/github', [UserController::class, "github"])->middleware('guest')->name('github');
 Route::post('/logout', [UserController::class, "logout"])->middleware('auth')->name('logout');
 Route::get('/dashboard', [UserController::class, "showDashboard"])->middleware('auth')->name('dashboard');
 Route::post('/register', [UserController::class, "register"])->middleware('guest');

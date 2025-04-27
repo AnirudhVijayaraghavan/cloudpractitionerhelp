@@ -39,10 +39,13 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button type="submit"
-                        class="w-50 py-2 px-4 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition">
-                        Update Profile
-                    </button>
+                    @if (!$userData->isOAuth)
+                        <button type="submit"
+                            class="w-50 py-2 px-4 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition">
+                            Update Profile
+                        </button>
+                    @endif
+
                 </form>
             </div>
 
@@ -78,10 +81,13 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button type="submit"
-                        class="w-50 py-2 px-4 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition">
-                        Update Password
-                    </button>
+                    @if (!$userData->isOAuth)
+                        <button type="submit"
+                            class="w-50 py-2 px-4 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition">
+                            Update Password
+                        </button>
+                    @endif
+
                 </form>
             </div>
 
@@ -92,7 +98,7 @@
                     Buy more credits, to continue taking on more tests:
                 </p>
                 <ul class="list-disc list-inside text-gray-700 mb-4 space-y-2">
-                    <li>You currently have: {{$userData->credits}} credits remaining.</li>
+                    <li>You currently have: {{ $userData->credits }} credits remaining.</li>
                     <li>Generous offerings</li>
                     <li>Priority Support</li>
                     <li>No expiration of purchased credits</li>
@@ -104,7 +110,7 @@
                     class="inline-block px-4 py-2 bg-green-500 text-white rounded-md shadow hover:bg-green-700 transition">
                     Buy Credits
                 </a>
-                <hr class="m-5"/>
+                <hr class="m-5" />
                 <h2 class="text-xl font-bold mb-4">Premium Subscription</h2>
                 <p class="text-gray-700 mb-4">
                     Upgrade to premium to unlock exclusive features, including:

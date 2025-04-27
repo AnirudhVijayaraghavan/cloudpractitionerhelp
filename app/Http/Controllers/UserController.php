@@ -3,13 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
     //
+    public function githubRedirect()
+    {
+
+        $githubUser = Socialite::driver('github')->stateless()->user();
+        // dd($user);
+        $user = User::updateOrCreate([
+            'email' => $githubUser->email,
+        ], [
+            'name' => $githubUser->name,
+            'password' => Hash::make(Str::random(10)),
+            'isOAuth' => 1,
+        ]);
+        Auth::login($user);
+        return redirect(route('dashboard'));
+
+    }
+    public function github()
+    {
+
+        return Socialite::driver('github')->redirect();
+
+    }
     public function logout()
     {
         $user = auth()->user();

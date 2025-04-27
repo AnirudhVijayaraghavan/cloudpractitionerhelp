@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
         if ($gateAuthorization->allowed()) {
             $incomingFields = $request->validate([
-                "name" => ['nullable', 'min:3', 'max:25', Rule::unique('users', 'name')],
+                "name" => ['nullable', 'min:3', 'max:25'],
                 "email" => ['nullable', 'email', Rule::unique('users', 'email')]
             ]);
 
@@ -53,7 +53,7 @@ class ProfileController extends Controller
     }
     public function showProfile(User $id)
     {
-        $existCheck = User::where("name", $id->name)->first();
+        $existCheck = User::where("id", $id->id)->first();
         //return $existCheck;
 
         $gateAuthorization = Gate::inspect('view', $id);
