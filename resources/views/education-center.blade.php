@@ -7,7 +7,7 @@
             @foreach ($tracks as $key => $label)
                 <a href="{{ route('educationtrack', $key) }}"
                     class="block bg-white rounded-2xl shadow-lg hover:shadow-2xl transition p-8 text-center">
-                    <img src="{{ asset("images/{$key}-logo.png") }}" alt="{{ $label }}" class="mx-auto h-20 mb-4" />
+                    <img src="{{ asset("{$key}-logo.jpg") }}" alt="{{ $label }}" class="mx-auto h-20 mb-4" />
                     <h2 class="text-2xl font-semibold mb-2">{{ $label }}</h2>
                     <p class="text-gray-600">
                         {{-- custom blurbs per track? --}}

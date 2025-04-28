@@ -36,6 +36,8 @@ Route::get('/education-section', [EducationController::class, "showEducationSect
 Route::get('/quizzes-section/{id}/quizdetail/{quizID}', [QuizzesController::class, "viewSingleQuizDetails"])
     ->middleware('auth')
     ->name('quizdetailindividual');
+Route::get('/quizzes-section/{id}/quizdetail', [QuizzesController::class, "viewAllQuizDetails"])->middleware('auth')
+    ->name('quizdetails');
 Route::put('/quizzes-section/{id}/newquiz/{quizID}', [QuizzesController::class, "storeNewQuiz"])
     ->middleware('auth')
     ->name('quizsessionstore');

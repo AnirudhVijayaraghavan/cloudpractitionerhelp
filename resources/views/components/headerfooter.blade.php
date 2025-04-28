@@ -79,6 +79,61 @@
             </div>
         </footer>
         <livewire:scripts />
+        {{-- Floating Quick-Actions FAB (everywhere except Dashboard) --}}
+        @unless (request()->routeIs('dashboard'))
+            <div x-data="{ open: false }" class="fixed bottom-6 right-6 z-50" @keydown.escape.window="open = false">
+                {{-- Open-FAB (plus) --}}
+                <button x-show="!open" @click="open = true"
+                    class="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg
+                   flex items-center justify-center transform transition"
+                    aria-label="Open Quick Actions">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                </button>
+
+                {{-- Expanded Menu --}}
+                <div x-show="open" x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 scale-75" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 scale-100"
+                    x-transition:leave-end="opacity-0 scale-75" @click.away="open = false" class="mt-2 relative">
+                    <div class="bg-white rounded-2xl shadow-2xl ring-1 ring-gray-200 p-6 w-56">
+                        {{-- Close button inside the card --}}
+                        <button @click="open = false"
+                            class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none"
+                            aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+
+                        {{-- Menu links --}}
+                        <nav class="space-y-3 mt-1">
+                            <a href="{{ route('quizzessection', auth()->user()->id) }}"
+                                class="block px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-800 font-medium">
+                                Start New Quiz
+                            </a>
+                            <a href="{{ route('quizzessection', auth()->user()->id) }}"
+                                class="block px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-800 font-medium">
+                                View Quiz History
+                            </a>
+                            <a href="{{ route('profile', auth()->user()->id) }}"
+                                class="block px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-800 font-medium">
+                                Update Profile
+                            </a>
+                            <a href="{{ route('checkoutshow') }}"
+                                class="block px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-800 font-medium">
+                                Buy Credits
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        @endunless
+
     </body>
 
 </x-commonhtml>
