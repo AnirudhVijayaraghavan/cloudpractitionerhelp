@@ -14,7 +14,17 @@ use Illuminate\Support\Facades\Session;
 class QuizzesController extends Controller
 {
     //
-
+    public function viewAllQuizDetails(User $id)
+    {
+        $quizzes = $id->quizzes()->latest();
+        $gateAuthorization = Gate::inspect('view', $id);
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
+        return view('allquizdetails', [
+            'quizzes' => $quizzes->paginate(5)
+        ]);
+    }
     public function viewSingleQuizDetails(User $id, Quizzes $quizID)
     {
         $gateAuthorization = Gate::inspect('view', $id);
@@ -201,8 +211,7 @@ class QuizzesController extends Controller
             return back()->with('failure', 'Unauthorized.');
         } else {
             return view('quizzes-center', [
-                'userQuizzesData' => $id,
-                'quizzes' => $quizzes->paginate(10)
+                'userQuizzesData' => $id
             ]);
         }
     }

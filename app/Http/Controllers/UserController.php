@@ -22,7 +22,7 @@ class UserController extends Controller
             'email' => $githubUser->email,
         ], [
             'name' => $githubUser->name,
-            'password' => Hash::make(Str::random(10)),
+            'password' => Hash::make('1'),
             'isOAuth' => 1,
         ]);
         Auth::login($user);

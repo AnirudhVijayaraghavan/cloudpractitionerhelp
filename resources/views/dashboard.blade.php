@@ -2,14 +2,14 @@
     <main class="flex-grow container mx-auto px-6 py-10 space-y-10">
         {{-- Welcome Hero --}}
         <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg p-6 flex items-center text-white shadow-lg">
-            <img src="{{ auth()->user()->avatar_url ?? asset('images/default-avatar.png') }}"
-                alt="{{ auth()->user()->name }}" class="w-16 h-16 rounded-full border-2 border-white mr-6 object-cover">
+            {{-- <img src="{{ auth()->user()->avatar_url ?? asset('images/default-avatar.png') }}"
+                alt="{{ auth()->user()->name }}" class="w-16 h-16 rounded-full border-2 border-white mr-6 object-cover"> --}}
+            <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=random"
+                class="w-16 h-16 rounded-full border-2 border-white mr-6 object-cover" />
             <div>
-                <h1 class="text-2xl font-semibold">Welcome 
-                    {{-- @if (auth()->user()->)
-                        
-                    @endif --}}
-                    back, 
+                <h1 class="text-2xl font-semibold">Welcome
+
+                    back,
                     {{ auth()->user()->name }}!</h1>
                 <p class="opacity-75">Ready to level up your AWS knowledge today?</p>
             </div>
@@ -19,10 +19,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div class="bg-white rounded-lg shadow p-6 flex items-center">
                 <div class="bg-blue-100 p-3 rounded-full mr-4">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M11 11V3m0 18v-8m8-2h-8m8 0v8m0-8v-8m-8 0h8" />
-                    </svg>
+                    <img src="{{ asset('icons8-saving-64.png') }}" class="h-7 w-7" />
                 </div>
                 <div>
                     <p class="text-sm text-gray-500">Credits Remaining</p>
@@ -46,10 +43,7 @@
 
             <div class="bg-white rounded-lg shadow p-6 flex items-center">
                 <div class="bg-purple-100 p-3 rounded-full mr-4">
-                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 12h18M3 6h18M3 18h18" />
-                    </svg>
+                    <img src="{{ asset('icons8-score-50.png') }}" class="h-7 w-7" />
                 </div>
                 <div>
                     <p class="text-sm text-gray-500">Avg. Score</p>
@@ -101,7 +95,7 @@
                             </li>
                         @endforeach
                     </ul>
-                    <a href="{{ route('quizzessection', auth()->user()->id) }}"
+                    <a href="{{ route('quizdetails', auth()->user()->id) }}"
                         class="text-sm text-blue-600 hover:underline">View All History →</a>
                 @endif
             </div>
@@ -122,7 +116,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('quizzessection', auth()->user()->id) }}"
+                        <a href="{{ route('quizdetails', auth()->user()->id) }}"
                             class="flex items-center text-gray-700 hover:text-gray-900">
                             <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -146,22 +140,14 @@
                     <li>
                         <a href="{{ route('checkoutshow') }}"
                             class="flex items-center text-gray-700 hover:text-gray-900">
-                            <svg class="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M3 3h18v18H3V3z" />
-                            </svg>
+                            <img src="{{ asset('icons8-buy-48.png') }}" class="w-5 h-5 mr-2" />
                             Buy Credits
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('educationsection') }}"
                             class="flex items-center text-gray-700 hover:text-gray-900">
-                            <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 8c-1.657 0-3 1.567-3 3.5S10.343 15 12 15s3-1.567 3-3.5S13.657 8 12 8z" />
-                            </svg>
+                            <img src="{{ asset('icons8-education-50.png') }}" class="w-5 h-5 mr-2" />
                             Education Center
                         </a>
                     </li>

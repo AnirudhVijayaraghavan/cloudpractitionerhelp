@@ -5,8 +5,9 @@
             <img src="{{ asset('images/profile-cover.jpg') }}" alt=""
                 class="absolute inset-0 w-full h-full object-cover opacity-30">
             <div class="absolute -bottom-12 text-center">
-                <img src="{{ $userData->avatar_url ?? asset('images/default-avatar.png') }}" alt="{{ $userData->name }}"
-                    class="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover">
+
+                <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=random"
+                    class="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover" />
             </div>
         </div>
         <div class="pt-10 text-center">
