@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PremiumController;
+use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
@@ -12,7 +13,15 @@ use App\Http\Controllers\EducationController;
 // Route::middleware(['auth'])->group(function () {
 
 // });
-// Payment / Credits / Premium related routes - Handles all things payment related.
+// Support related routes - SupportController - Handles customer support functions
+Route::get('/support/create', [SupportController::class, "create"])
+    ->middleware('auth')
+    ->name('supportcreate');
+Route::post('/support/ticket', [SupportController::class, 'store'])
+    ->middleware('auth')
+    ->name('supportstore');
+
+// Payment / Credits / Premium related routes - PremiumController - Handles all things payment related.
 Route::get('/checkout', [PremiumController::class, 'show'])
     ->middleware('auth')->name('checkoutshow');
 Route::post('/checkout', [PremiumController::class, 'checkoutCredits'])

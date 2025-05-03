@@ -151,6 +151,13 @@
                             Education Center
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('supportcreate') }}"
+                            class="flex items-center text-gray-700 hover:text-gray-900">
+                            <img src="{{ asset('icons8-support-50.png') }}" class="w-5 h-5 mr-2" />
+                            Support Center
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

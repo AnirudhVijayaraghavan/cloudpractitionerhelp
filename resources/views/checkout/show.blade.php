@@ -1,8 +1,18 @@
 <x-headerfooter>
-    <main class="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <main class="flex-grow container max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-extrabold text-center mb-10">Buy Quiz Credits</h1>
+        <p class="text-lg text-gray-700 text-center mb-10">
+            We appreciate your patronage, but are unable to handle payments at this time.<br>
+            If you’d like extra credits, please
+            <a href="{{ route('supportcreate') }}" class="inline-block text-blue-600 hover:underline font-semibold">
 
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <img src="{{ asset('icons8-support-50.png') }}" class="inline h-5 w-5 mb-1 mr-1" />
+                open a support ticket
+            </a>
+            and our team will hook you up with credits.
+        </p>
+
+        {{-- <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             @php
                 $plans = [
                     ['credits' => 2, 'amount' => 100, 'label' => '$1 for 2 credits'],
@@ -36,6 +46,6 @@
                     </div>
                 </div>
             @endforeach
-        </div>
+        </div> --}}
     </main>
 </x-headerfooter>
