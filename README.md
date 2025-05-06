@@ -1,4 +1,4 @@
-# Quiz Portal
+# CloudPRactitionerHelp
 
 > **Master your certifications with confidence.**  
 > A premium, enterprise-grade quiz simulator and learning platform—built for serious learners and organizations.
@@ -8,7 +8,7 @@
 ## 🌟 Why Quiz Portal?
 
 - **Industry-Focused Content**  
-  Targeted quiz decks for AWS CCP, AWS SA, and more—designed by certified experts.  
+  Targeted quiz decks for AWS CCP, AWS SA, and more—designed by certification holders.  
 - **Real-World Simulation**  
   Timed exams, randomized questions, detailed explanations—feel the pressure, learn the material.  
 - **Comprehensive Analytics**  
@@ -43,6 +43,6 @@
   <a href="https://quiz.example.com/demo"><img src="docs/demo-screenshot.png" alt="Live Demo Screenshot" width="700" /></a>
 </p>
 
-[▶ Request Demo](https://quiz.example.com/contact)
+[▶ Check us out!](https://www.cloudpractitionerhelp.com/)
 
 ---
