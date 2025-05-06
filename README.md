@@ -40,7 +40,7 @@
 > _“Seeing is believing”—request a live demo today!_
 
 <p align="center">
-  <a href="https://quiz.example.com/demo"><img src="docs/demo-screenshot.png" alt="Live Demo Screenshot" width="700" /></a>
+  <a href="(https://www.cloudpractitionerhelp.com)"><img src="docs/Live Screenshot.png" alt="Live Demo Screenshot" width="700" /></a>
 </p>
 
 [▶ Check us out!](https://www.cloudpractitionerhelp.com/)
