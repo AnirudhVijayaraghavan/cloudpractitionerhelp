@@ -23,6 +23,10 @@ class SupportController extends Controller
         ]);
         $data['user_id'] = auth()->id();
 
+        if ($request->input('email') !== auth()->user()->email) {
+            return back()->with('failure', 'You may only submit tickets under your own email address.');
+        }
+
         $newTicket = SupportTicket::create($data);
         Log::info("new ticket created");
         // Enqueue the email:

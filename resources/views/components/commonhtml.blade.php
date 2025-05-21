@@ -24,8 +24,8 @@
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
     <!-- Tailwind and other global CSS… -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    
+    @vite('resources/css/app.css')
+
     <livewire:styles />
 </head>
 {{ $slot }}

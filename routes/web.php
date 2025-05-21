@@ -90,7 +90,7 @@ Route::get('/', function () {
 // profile page - make it close to laravel start kits. - DONE
 // set up dashboard page - DONE
 // quiz - make with livewire - PArtially DONE
-// educational content - 
+// educational content - DONE
 // premium - Partially DONE (added test version credits, need to do premium, and production version of both)
 // admin - 
-// quizsessiondisplay route: must add middleware to ensure it cannot be called or display from address bar
+// quizsessiondisplay route: must add middleware to ensure it cannot be called or display from address bar - DONE

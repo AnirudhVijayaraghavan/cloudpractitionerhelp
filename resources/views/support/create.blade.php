@@ -16,14 +16,13 @@
                 @enderror
             </div>
 
-            {{-- Email --}}
+            {{-- Email (readonly + hidden) --}}
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Your Email</label>
-                <input type="email" name="email" id="email" value="{{ old('email', auth()->user()->email) }}"
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                @error('email')
-                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                @enderror
+                <label for="email_display" class="block text-sm font-medium text-gray-700">Your Email</label>
+                <input type="email" id="email_display" value="{{ auth()->user()->email }}"
+                    class="mt-1 block w-full border-gray-300 bg-gray-100 rounded-md shadow-sm" readonly>
+                {{-- still send it --}}
+                <input type="hidden" name="email" value="{{ auth()->user()->email }}">
             </div>
 
             {{-- Message --}}
@@ -41,7 +40,7 @@
             <div class="text-center">
                 <button type="submit"
                     class="inline-flex items-center px-6 py-3 bg-blue-400 text-white font-semibold rounded-md hover:bg-blue-500 transition">
-                    <img src="{{asset('icons8-support-50.png')}}" class="text-white p-5h-6 w-6"/>
+                    <img src="{{ asset('icons8-support-50.png') }}" class="h-6 w-6 mr-2" alt="support icon" />
                     Send Ticket
                 </button>
             </div>
