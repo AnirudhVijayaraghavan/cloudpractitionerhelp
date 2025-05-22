@@ -77,7 +77,7 @@ Route::get('/auth/sign-in/github', [UserController::class, "github"])->middlewar
 Route::post('/logout', [UserController::class, "logout"])->middleware('auth')->name('logout');
 Route::get('/dashboard', [UserController::class, "showDashboard"])->middleware('auth')->name('dashboard');
 Route::post('/register', [UserController::class, "register"])->middleware('guest');
-Route::post('/login', [UserController::class, "login"])->middleware('guest');
+Route::post('/login', [UserController::class, "login"])->middleware(['throttle:login', 'guest']);
 Route::get('/register', [UserController::class, "showRegister"])->middleware('guest')->name('register');
 Route::get('/login', [UserController::class, "showLogin"])->middleware('guest')->name('login');
 Route::get('/', function () {
@@ -89,8 +89,13 @@ Route::get('/', function () {
 // basic policies / gates for authorization. - DONE
 // profile page - make it close to laravel start kits. - DONE
 // set up dashboard page - DONE
-// quiz - make with livewire - PArtially DONE
+// quiz - make with livewire - 
 // educational content - DONE
 // premium - Partially DONE (added test version credits, need to do premium, and production version of both)
-// admin - 
 // quizsessiondisplay route: must add middleware to ensure it cannot be called or display from address bar - DONE
+// Rate Limit throttling general purpose -
+// Incorrect attempts for login - DONE
+// admin - 
+// sentry / logging - 
+// Analytics - 
+// language packs - 
