@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\PremiumController;
-use App\Http\Controllers\SupportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizzesController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\EducationController;
 
@@ -13,6 +14,42 @@ use App\Http\Controllers\EducationController;
 // Route::middleware(['auth'])->group(function () {
 
 // });
+// Admin related routes - AdminController - Handles everything admin related / CMS
+Route::middleware(['auth', 'can:admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        // Dashboard
+        Route::get('/', [AdminController::class, 'index'])
+            ->name('dashboard');
+
+        // Handling Users            
+        Route::get('/users', [AdminController::class, 'showUsers'])
+            ->name('users.index');
+        Route::get('/users/create', [AdminController::class, 'showUsersCreate'])
+            ->name('users.create');
+        Route::post('/users/store', [AdminController::class, 'storeUser'])
+            ->name('users.store');
+        Route::get('/users/edit/{user}', [AdminController::class, 'showUsersEdit'])
+            ->name('users.edit');
+        Route::put('/users/update/{user}', [AdminController::class, 'updateUser'])
+            ->name('users.update');
+        Route::delete('/users/delete/{user}', [AdminController::class, 'destroyUser'])
+            ->name('users.destroy');
+
+        Route::get('/questions', [AdminController::class, 'showQuestions'])
+            ->name('questions.index');
+        Route::get('/quizzes', [AdminController::class, 'showQuizzes'])
+            ->name('quizzes.index');
+        Route::get('/articles', [AdminController::class, 'showArticles'])
+            ->name('articles.index');
+        Route::get('/tickets', [AdminController::class, 'showTickets'])
+            ->name('tickets.index');
+
+
+        // (you can add other AdminController routes here later)
+    });
+
 // Support related routes - SupportController - Handles customer support functions
 Route::get('/support/create', [SupportController::class, "create"])
     ->middleware('auth')

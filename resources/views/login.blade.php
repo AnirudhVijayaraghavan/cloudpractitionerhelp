@@ -38,7 +38,7 @@
                 @csrf
                 <div>
                     <label for="email" class="block text-sm font-medium">Email Address</label>
-                    <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus
+                    <input id="email" name="email" type="email" value="{{ old('email') }}" autofocus
                         class="mt-1 block w-full px-4 py-2 border rounded-md bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500" />
                     @error('email')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -46,7 +46,7 @@
                 </div>
                 <div>
                     <label for="password" class="block text-sm font-medium">Password</label>
-                    <input id="password" name="password" type="password" required
+                    <input id="password" name="password" type="password" 
                         class="mt-1 block w-full px-4 py-2 border rounded-md bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-blue-500" />
                     @error('password')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
