@@ -30,22 +30,58 @@ Route::middleware(['auth', 'can:admin'])
             ->name('users.create');
         Route::post('/users/store', [AdminController::class, 'storeUser'])
             ->name('users.store');
-        Route::get('/users/edit/{user}', [AdminController::class, 'showUsersEdit'])
+        Route::get('/users/{user}', [AdminController::class, 'showUsersEdit'])
             ->name('users.edit');
-        Route::put('/users/update/{user}', [AdminController::class, 'updateUser'])
+        Route::put('/users/{user}', [AdminController::class, 'updateUser'])
             ->name('users.update');
-        Route::delete('/users/delete/{user}', [AdminController::class, 'destroyUser'])
+        Route::delete('/users/{user}', [AdminController::class, 'destroyUser'])
             ->name('users.destroy');
 
+        // Handling Questions
         Route::get('/questions', [AdminController::class, 'showQuestions'])
             ->name('questions.index');
+        Route::get('/questions/create', [AdminController::class, 'showQuestionsCreate'])
+            ->name('questions.create');
+        Route::post('/questions/store', [AdminController::class, 'storeQuestion'])
+            ->name('questions.store');
+        Route::get('/questions/{question}', [AdminController::class, 'showQuestionsEdit'])
+            ->name('questions.edit');
+        Route::put('/questions/{question}', [AdminController::class, 'updateQuestion'])
+            ->name('questions.update');
+        Route::delete('/questions/{question}', [AdminController::class, 'destroyQuestion'])
+            ->name('questions.destroy');
+
+        // Handling Quizzes
         Route::get('/quizzes', [AdminController::class, 'showQuizzes'])
             ->name('quizzes.index');
+        Route::get('/quizzes/{quiz}', [AdminController::class, 'showQuiz'])
+            ->name('quizzes.show');
+        Route::delete('/quizzes/delete/{quiz}', [AdminController::class, 'destroyQuiz'])
+            ->name('quizzes.destroy');
+
+        // Handling Articles
         Route::get('/articles', [AdminController::class, 'showArticles'])
             ->name('articles.index');
+        Route::get('/articles/create', [AdminController::class, 'showArticlesCreate'])
+            ->name('articles.create');
+        Route::post('/articles/store', [AdminController::class, 'storeArticle'])
+            ->name('articles.store');
+        Route::get('/articles/{article}', [AdminController::class, 'showArticlesEdit'])
+            ->name('articles.edit');
+        Route::put('/articles/{article}', [AdminController::class, 'updateArticle'])
+            ->name('articles.update');
+        Route::delete('/articles/{article}', [AdminController::class, 'destroyArticle'])
+            ->name('articles.destroy');
+
+        // Handling Tickets
         Route::get('/tickets', [AdminController::class, 'showTickets'])
             ->name('tickets.index');
-
+        Route::get('/tickets/{ticket}', [AdminController::class, 'showTicket'])
+            ->name('tickets.show');
+        Route::put('/tickets/{ticket}', [AdminController::class, 'updateTicket'])
+            ->name('tickets.update');
+        Route::delete('/tickets/{ticket}', [AdminController::class, 'destroyTicket'])
+            ->name('tickets.destroy');
 
         // (you can add other AdminController routes here later)
     });
@@ -126,7 +162,7 @@ Route::get('/', function () {
 // basic policies / gates for authorization. - DONE
 // profile page - make it close to laravel start kits. - DONE
 // set up dashboard page - DONE
-// quiz - make with livewire - 
+// quiz - DONE
 // educational content - DONE
 // premium - Partially DONE (added test version credits, need to do premium, and production version of both)
 // quizsessiondisplay route: must add middleware to ensure it cannot be called or display from address bar - DONE
@@ -134,5 +170,6 @@ Route::get('/', function () {
 // Incorrect attempts for login - DONE
 // admin - 
 // sentry / logging - 
+// pulse metrics - 
 // Analytics - 
 // language packs - 

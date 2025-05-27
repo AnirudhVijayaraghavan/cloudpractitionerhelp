@@ -14,6 +14,12 @@
                 </div>
                 @auth
                     <nav class="flex flex-nowrap items-center space-x-2">
+                        @if (auth()->user()->isAdmin)
+                            <a wire:navigate href="{{ route('admin.dashboard') }}"
+                                class="text-gray-600 hover:text-gray-800 text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 transition">
+                                Admin
+                            </a>
+                        @endif
                         <a wire:navigate href="{{ route('dashboard') }}"
                             class="text-gray-600 hover:text-gray-800 text-xs md:text-sm px-2 py-1 md:px-4 md:py-2 transition">
                             Dashboard

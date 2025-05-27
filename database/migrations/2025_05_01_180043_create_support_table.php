@@ -35,7 +35,7 @@ return new class extends Migration {
 
             $table->timestamp('closed_at')
                 ->nullable()
-                ->comment('When an admin closed the ticket');
+                ->comment('Resolved.');
 
             $table->timestamps();
             $table->softDeletes();

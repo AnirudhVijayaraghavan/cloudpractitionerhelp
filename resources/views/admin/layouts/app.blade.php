@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Admin Panel | @yield('title', 'Dashboard')</title>
     @vite('resources/css/app.css')
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 {{-- Notification Container --}}
 @if (session()->has('success'))
@@ -64,6 +65,9 @@
             <a href="{{ route('admin.tickets.index') }}"
                 class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50">
                 <x-heroicon-o-ticket class="w-5 h-5 mr-3" /> Tickets
+            </a>
+            <a href="{{ route('dashboard') }}" class="flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50">
+                <x-heroicon-o-arrow-uturn-left class="w-5 h-5 mr-3" /> CPH Web-Application
             </a>
         </nav>
     </aside>

@@ -75,7 +75,9 @@ class UserController extends Controller
                 $user->setRememberToken(null);
                 $user->save();
             }
-
+            if (auth()->user()->isAdmin) {
+                return redirect(route('admin.dashboard'))->with('success', 'You have successfully logged in.');
+            }
             return redirect('/dashboard')->with('success', 'You have successfully logged in.');
         } else {
             return redirect('/login')->with('failure', 'Incorrect login attempt.');
