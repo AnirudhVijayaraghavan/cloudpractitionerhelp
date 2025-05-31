@@ -13,6 +13,31 @@ use Laravel\Socialite\Facades\Socialite;
 class UserController extends Controller
 {
     //
+
+    public function googleRedirect()
+    {
+
+        $googleUser = Socialite::driver('google')->stateless()->user();
+        // dd($user);
+        $user = User::updateOrCreate([
+            'email' => $googleUser->email,
+        ], [
+            'name' => $googleUser->name,
+            'password' => Hash::make('1'),
+            'isOAuth' => 1,
+            'email_verified_at' => now()
+        ]);
+        Auth::login($user);
+
+        return redirect(route('dashboard'));
+
+    }
+    public function google()
+    {
+
+        return Socialite::driver('google')->redirect();
+
+    }
     public function githubRedirect()
     {
 
@@ -24,6 +49,7 @@ class UserController extends Controller
             'name' => $githubUser->name,
             'password' => Hash::make('1'),
             'isOAuth' => 1,
+            'email_verified_at' => now()
         ]);
         Auth::login($user);
         return redirect(route('dashboard'));

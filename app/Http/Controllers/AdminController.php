@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Article;
 use App\Models\User;
+use App\Models\Article;
 use App\Models\Quizzes;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\SupportTicket;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
@@ -17,13 +19,22 @@ class AdminController extends Controller
     //
     // Articles CMS Logic
     public function destroyArticle(Article $article)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $article->delete();
+        Cache::flush();
         return redirect(route('admin.articles.index'))
             ->with('success', 'Article ' . $article->id . ' deleted successfully.');
     }
     public function updateArticle(Article $article, Request $request)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $incomingFields = $request->validate([
             'track' => ['required', 'string', 'max:100'],
             'title' => ['required', 'string', 'max:255'],
@@ -41,11 +52,16 @@ class AdminController extends Controller
 
         $article->update($incomingFields);
         $article->save();
+        Cache::flush();
         return redirect(route('admin.articles.index'))
             ->with('success', 'Article ' . $article->id . ' updated successfully.');
     }
     public function showArticlesEdit(Article $article)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         return view(
             'admin.articles.edit',
             [
@@ -54,7 +70,11 @@ class AdminController extends Controller
         );
     }
     public function storeArticle(Request $request)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $incomingFields = $request->validate([
             'track' => ['required', 'string', 'max:100'],
             'title' => ['required', 'string', 'max:255'],
@@ -73,16 +93,24 @@ class AdminController extends Controller
             $incomingFields['order'] = Article::count() + 1;
         }
         Article::create($incomingFields);
+        Cache::flush();
         return redirect(route('admin.articles.index'))
             ->with('success', 'Article added successfully');
     }
     public function showArticlesCreate()
     {
-
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         return view('admin.articles.create');
     }
     public function showArticles()
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $articles = Article::orderByDesc('id')
             ->paginate(15);
         return view('admin.articles.index', [
@@ -92,13 +120,21 @@ class AdminController extends Controller
 
     // Tickets CMS Logic
     public function destroyTicket(SupportTicket $ticket)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $ticket->delete();
         return redirect(route('admin.tickets.index'))
             ->with('success', 'Ticket ' . $ticket->id . ' deleted successfully.');
     }
     public function updateTicket(Request $request, SupportTicket $ticket)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $incomingFields = $request->validate([
             'status' => ['sometimes', 'in:open,pending,closed'],
             'priority' => ['sometimes', 'in:low,normal,high'],
@@ -111,7 +147,11 @@ class AdminController extends Controller
             ->with('success', 'Ticket status updated!');
     }
     public function showTicket(SupportTicket $ticket)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         return view(
             'admin.tickets.show',
             [
@@ -120,7 +160,11 @@ class AdminController extends Controller
         );
     }
     public function showTickets()
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $tickets = SupportTicket::orderByDesc('id')
             ->paginate(15);
         return view(
@@ -133,13 +177,21 @@ class AdminController extends Controller
 
     // Quizzes CMS Logic
     public function destroyQuiz(Quizzes $quiz)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $quiz->delete();
         return redirect(route('admin.quizzes.index'))
             ->with('success', 'Quiz ' . $quiz->id . ' deleted successfully.');
     }
     public function showQuiz(Quizzes $quiz)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         return view(
             'admin.quizzes.show',
             [
@@ -148,7 +200,11 @@ class AdminController extends Controller
         );
     }
     public function showQuizzes()
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $quizzes = Quizzes::orderByDesc('id')
             ->paginate(15);
         return view(
@@ -161,13 +217,21 @@ class AdminController extends Controller
 
     // Questions CMS Logic
     public function destroyQuestion(Question $question)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $question->delete();
         return redirect(route('admin.questions.index'))
             ->with('success', 'Question ' . $question->id . ' deleted successfully.');
     }
     public function updateQuestion(Question $question, Request $request)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $incomingFields = $request->validate([
             'text' => 'required|string',
             'options' => 'required|string',  // raw JSON string
@@ -199,7 +263,11 @@ class AdminController extends Controller
             ->with('success', 'Question ' . $question->id . ' updated successfully.');
     }
     public function showQuestionsEdit(Question $question)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         return view(
             'admin.questions.edit',
             [
@@ -208,7 +276,11 @@ class AdminController extends Controller
         );
     }
     public function storeQuestion(Request $request)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $incomingFields = $request->validate([
             'text' => 'required|string',
             'options' => 'required|string',  // raw JSON string
@@ -239,11 +311,18 @@ class AdminController extends Controller
     }
     public function showQuestionsCreate()
     {
-
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         return view('admin.questions.create');
     }
     public function showQuestions()
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $questions = Question::orderByDesc('id')
             ->paginate(15);
         return view('admin.questions.index', [
@@ -253,13 +332,21 @@ class AdminController extends Controller
 
     // User CMS Logic
     public function destroyUser(User $user)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $user->delete();
         return redirect(route('admin.users.index'))
             ->with('success', 'User ' . $user->id . ' deleted successfully.');
     }
     public function updateUser(User $user, Request $request)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $incomingFields = $request->validate([
             'name' => ['nullable', 'string', 'min:3', 'max:25'],
             'email' => [
@@ -283,7 +370,11 @@ class AdminController extends Controller
             ->with('success', 'User ' . $user->id . ' updated successfully.');
     }
     public function showUsersEdit(User $user)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         return view(
             'admin.users.edit',
             [
@@ -292,7 +383,11 @@ class AdminController extends Controller
         );
     }
     public function storeUser(Request $request)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $incomingFields = $request->validate([
             'name' => ['required', 'string', 'min:3', 'max:25'],
             'email' => [
@@ -316,11 +411,18 @@ class AdminController extends Controller
     }
     public function showUsersCreate()
     {
-
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         return view('admin.users.create');
     }
     public function showUsers()
     {
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $users = User::orderByDesc('created_at')
             ->paginate(15);
         return view('admin.users.index', [
@@ -330,7 +432,11 @@ class AdminController extends Controller
 
     // Dashboard
     public function index(Request $request)
-    {
+    {   
+        $gateAuthorization = Gate::inspect('view', auth()->user());
+        if ($gateAuthorization->denied()) {
+            return back()->with('failure', 'Unauthorized.');
+        }
         $totalUsers = User::count();
         $activeQuizzes = Quizzes::where('status', 'in-progress')->count();
         $completedQuizzes = Quizzes::where('status', 'completed')->count();

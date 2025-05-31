@@ -78,17 +78,30 @@
 
         {{ $slot }}
 
-        <!-- Footer -->
-        <footer class="bg-white border-t">
-            <div class="container mx-auto px-6 py-4 text-center">
-                <p class="text-gray-600">&copy; {{ date('Y') }} CloudPractitionerHelp. All rights reserved.</p>
+        <!-- Updated Footer -->
+        <footer class="bg-white border-t border-gray-200">
+            <div class="container mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between">
+                <p class="text-gray-600 text-sm mb-4 md:mb-0">
+                    &copy; {{ date('Y') }} CloudPractitionerHelp. All rights reserved.
+                </p>
+                <div class="flex items-center space-x-4">
+                    <a wire:navigate href="{{ route('privacy') }}"
+                        class="text-gray-600 hover:text-blue-600 transition-colors duration-200">
+                        Privacy Policy
+                    </a>
+                    <span class="text-gray-400">|</span>
+                    <a wire:navigate href="{{ route('tos') }}"
+                        class="text-gray-600 hover:text-blue-600 transition-colors duration-200">
+                        Terms of Service
+                    </a>
+                </div>
             </div>
         </footer>
         <livewire:scripts />
         @auth
             {{-- Floating Quick-Actions FAB (everywhere except Dashboard) --}}
             @unless (request()->routeIs('dashboard'))
-                <div x-data="{ open: false }" class="fixed bottom-6 right-6 z-50" @keydown.escape.window="open = false">
+                <div x-data="{ open: false }" class="fixed bottom-20 right-6 z-50" @keydown.escape.window="open = false">
                     {{-- Open-FAB (plus) --}}
                     <button x-show="!open" @click="open = true"
                         class="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg
@@ -134,6 +147,14 @@
                                 <a href="{{ route('checkoutshow') }}"
                                     class="block px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-800 font-medium">
                                     Buy Credits
+                                </a>
+                                <a href="{{ route('educationsection') }}"
+                                    class="block px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-800 font-medium">
+                                    Education Center
+                                </a>
+                                <a href="{{ route('supportcreate') }}"
+                                    class="block px-3 py-2 rounded-lg hover:bg-gray-100 text-gray-800 font-medium">
+                                    Contact Support
                                 </a>
                             </nav>
                         </div>

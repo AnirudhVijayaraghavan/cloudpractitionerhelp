@@ -1,4 +1,5 @@
 <x-headerfooter>
+    @section('maintitle', 'Payments')
     <main class="flex-grow container max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-extrabold text-center mb-10">Buy Quiz Credits</h1>
         <p class="text-lg text-gray-700 text-center mb-10">

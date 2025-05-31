@@ -1,4 +1,5 @@
 <x-commonhtml>
+    @section('maintitle', 'Exam')
     <main class="container mx-auto px-6 py-8">
 
         <!-- Header (Title and Timer) -->

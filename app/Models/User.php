@@ -25,7 +25,8 @@ class User extends Authenticatable
         'credits',
         'isAdmin',
         'isPremium',
-        'isOAuth'
+        'isOAuth',
+        'email_verified_at'
     ];
 
     /**

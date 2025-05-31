@@ -1,5 +1,6 @@
 <x-headerfooter>
-    <main class="container mx-auto px-6 py-8">
+    @section('maintitle', 'Education Center')
+    <main class="flex-grow container mx-auto px-6 py-8">
         <h1 class="text-3xl font-bold mb-4">Education Center</h1>
         <p class="text-gray-700 mb-10">Choose your AWS track and dive into our curated study materials.</p>
 

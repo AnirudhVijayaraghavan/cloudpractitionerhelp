@@ -1,5 +1,5 @@
 <x-commonhtml>
-
+    @section('maintitle', 'Register')
     <body class="bg-gray-50 text-gray-800 transition-colors duration-300 flex items-center justify-center min-h-screen">
         <!-- Registration Form Card -->
         <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg">

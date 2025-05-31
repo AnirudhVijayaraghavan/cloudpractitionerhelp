@@ -1,4 +1,5 @@
 <x-headerfooter>
+    @section('maintitle', 'Profile')
     <div class="container mx-auto px-6 py-10 space-y-8">
         {{-- Banner + Avatar --}}
         <div class="relative bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg h-40 overflow-visible">

@@ -1,4 +1,5 @@
 <x-commonhtml>
+    @section('maintitle', 'Login')
     {{-- Notification Container --}}
     @if (session()->has('success'))
         <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
@@ -87,7 +88,7 @@
                 <a href="{{ route('github') }}">
                     <img src="{{ asset('github-mark.png') }}" alt="GitHub" class="h-8 w-auto" />
                 </a>
-                <a href="">
+                <a href="{{ route('google') }}">
                     <img src="{{ asset('icons8-google-48.png') }}" alt="Google" class="h-8 w-auto" />
                 </a>
             </div>

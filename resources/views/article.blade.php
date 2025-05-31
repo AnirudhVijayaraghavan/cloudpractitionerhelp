@@ -1,5 +1,5 @@
 <x-headerfooter>
-    <main class="container mx-auto px-6 py-8 max-w-6xl">
+    <main class="flex-grow container mx-auto px-6 py-8 max-w-6xl">
         {{-- Breadcrumbs --}}
         <nav class="text-sm text-gray-500 mb-4" aria-label="Breadcrumb">
             <ol class="list-reset flex">

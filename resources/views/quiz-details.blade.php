@@ -1,4 +1,5 @@
 <x-headerfooter>
+    @section('maintitle', 'Quiz Detail')
     <main class="container mx-auto px-6 py-8">
         <!-- Quiz Summary Section -->
         <section class="mb-8">

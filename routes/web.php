@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MiscController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
@@ -14,6 +15,10 @@ use App\Http\Controllers\EducationController;
 // Route::middleware(['auth'])->group(function () {
 
 // });
+// Misc Routes - Privacy, Terms of Service.
+Route::get('/privacy', [MiscController::class, "privacy"])->name('privacy');
+Route::get('/terms', [MiscController::class, "tos"])->name('tos');
+
 // Admin related routes - AdminController - Handles everything admin related / CMS
 Route::middleware(['auth', 'can:admin'])
     ->prefix('admin')
@@ -145,6 +150,8 @@ Route::get('/profile/{id}', [ProfileController::class, "showProfile"])->middlewa
 
 
 // Basic Routes - UserController - Handles Authentication, Registry, Landing page.
+Route::get('/api/auth/google/callback', [UserController::class, 'googleRedirect'])->middleware('guest');
+Route::get('/api/auth/google', [UserController::class, 'google'])->middleware('guest')->name('google');
 Route::get('/auth/sign-in/github/redirect', [UserController::class, "githubRedirect"])->middleware('guest');
 Route::get('/auth/sign-in/github', [UserController::class, "github"])->middleware('guest')->name('github');
 Route::post('/logout', [UserController::class, "logout"])->middleware('auth')->name('logout');
@@ -168,7 +175,8 @@ Route::get('/', function () {
 // quizsessiondisplay route: must add middleware to ensure it cannot be called or display from address bar - DONE
 // Rate Limit throttling general purpose -
 // Incorrect attempts for login - DONE
-// admin - 
+// admin - DONE
+// OAUth (Github / Google) - DONE
 // sentry / logging - 
 // pulse metrics - 
 // Analytics - 

@@ -47,7 +47,9 @@ class UserPolicy
      */
     public function update(User $authUser, User $user): bool
     {
-        
+        if ($authUser->isAdmin === 1) {
+            return true;
+        }
         return $authUser->id === $user->id;
     }
 

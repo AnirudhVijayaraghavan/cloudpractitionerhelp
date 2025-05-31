@@ -1,4 +1,5 @@
 <x-headerfooter>
+    @section('maintitle', 'Support')
     <main class="flex-grow container mx-auto max-w-xl py-12 px-4 sm:px-6 lg:px-8">
         <h1 class="text-3xl font-extrabold text-center mb-8">Submit a Support Ticket</h1>
 

@@ -1,4 +1,5 @@
 <x-headerfooter>
+    @section('maintitle', 'All Quiz Details')
     <main class="flex-grow container mx-auto px-6 py-12 space-y-10">
 
         {{-- Page Header + Summary Cards --}}

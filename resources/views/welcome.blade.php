@@ -1,4 +1,5 @@
 <x-headerfooter>
+    @section('maintitle', 'Welcome')
     <section class="bg-gradient-to-r from-blue-500 to-indigo-600">
         <div class="container mx-auto px-6 py-20 text-center">
             <h1 class="text-4xl md:text-6xl font-bold text-white">

@@ -1,4 +1,5 @@
 <x-headerfooter>
+    @section('maintitle', 'Quizzes Center')
     <main class="flex-grow container mx-auto px-6 py-12 space-y-12">
         {{-- Page Header --}}
         <div class="text-center space-y-2">
