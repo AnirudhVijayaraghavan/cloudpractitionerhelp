@@ -18,6 +18,9 @@ use App\Http\Controllers\EducationController;
 // Misc Routes - Privacy, Terms of Service.
 Route::get('/privacy', [MiscController::class, "privacy"])->name('privacy');
 Route::get('/terms', [MiscController::class, "tos"])->name('tos');
+Route::fallback(function () {
+    return response()->view('errors.404');
+});
 
 // Admin related routes - AdminController - Handles everything admin related / CMS
 Route::middleware(['auth', 'can:admin'])
@@ -177,6 +180,7 @@ Route::get('/', function () {
 // Incorrect attempts for login - DONE
 // admin - DONE
 // OAUth (Github / Google) - DONE
+// SEO - DONE
 // sentry / logging - 
 // pulse metrics - 
 // Analytics - 

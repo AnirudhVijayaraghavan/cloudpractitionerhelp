@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+    <!-- Landing page -->
+    <url>
+        <loc>https://cloudpractitionerhelp.com/</loc>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Static “Misc” pages -->
+    <url>
+        <loc>https://cloudpractitionerhelp.com/privacy</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://cloudpractitionerhelp.com/terms</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+
+    <!-- Support pages -->
+    <url>
+        <loc>https://cloudpractitionerhelp.com/support/create</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Checkout / Payment pages -->
+    <url>
+        <loc>https://cloudpractitionerhelp.com/checkout</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <!-- Education Center (dynamic) -->
+    <url>
+        <loc>https://cloudpractitionerhelp.com/education-section</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Authentication‐related (login/register) -->
+    <url>
+        <loc>https://cloudpractitionerhelp.com/login</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://cloudpractitionerhelp.com/register</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://cloudpractitionerhelp.com/dashboard</loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+</urlset>

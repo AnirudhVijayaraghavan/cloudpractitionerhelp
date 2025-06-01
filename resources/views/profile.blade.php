@@ -3,8 +3,7 @@
     <div class="container mx-auto px-6 py-10 space-y-8">
         {{-- Banner + Avatar --}}
         <div class="relative bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg h-40 overflow-visible">
-            <img src="{{ asset('images/profile-cover.jpg') }}" alt=""
-                class="absolute inset-0 w-full h-full object-cover opacity-30">
+            
             <div class="absolute -bottom-12 text-center">
 
                 <img src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}&background=random"

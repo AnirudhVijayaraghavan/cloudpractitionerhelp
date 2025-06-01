@@ -1,9 +1,9 @@
 <x-headerfooter>
-    @section('maintitle', 'Welcome')
+    @section('maintitle', 'Free AWS Practice Quizzes & Learning')
     <section class="bg-gradient-to-r from-blue-500 to-indigo-600">
         <div class="container mx-auto px-6 py-20 text-center">
             <h1 class="text-4xl md:text-6xl font-bold text-white">
-                Clearing the AWS CCP exam is hard. <br /> We've made it easy.
+                Clearing the AWS exams are hard. <br /> We've made it easy.
             </h1>
             <p class="mt-6 text-lg text-blue-100">
                 Elevate your knowledge with ultra-affordable quizzes, and free learning content to help you clear and
@@ -35,12 +35,12 @@
             <div
                 class="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 transform hover:scale-105 transition duration-300 group">
                 <div class="bg-blue-100 rounded-full p-4 inline-flex mb-4 group-hover:bg-blue-200 transition-colors">
-                    <img src="{{ asset('icons8-quiz-50.png') }}" />
+                    <img src="{{ asset('icons8-quiz-50.png') }}" alt="quiz-icon"/>
                 </div>
                 <h3 class="text-xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">Quiz Simulation Mode
                 </h3>
                 <p class="text-gray-600">
-                    AI‑powered question creation that adapts to your strengths and weaknesses in real‑time.
+                    AI‑powered quiz question creation that adapts to your strengths and weaknesses in real‑time.
                 </p>
             </div>
 
@@ -49,12 +49,12 @@
                 class="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 transform hover:scale-105 transition duration-300 group">
                 <div
                     class="bg-indigo-100 rounded-full p-4 inline-flex mb-4 group-hover:bg-indigo-200 transition-colors">
-                    <img src="{{ asset('icons8-education-50.png') }}" />
+                    <img src="{{ asset('icons8-education-50.png') }}" alt="education-icon"/>
                 </div>
-                <h3 class="text-xl font-semibold mb-2 group-hover:text-indigo-600 transition-colors">Free Educational
+                <h3 class="text-xl font-semibold mb-2 group-hover:text-indigo-600 transition-colors">Free Learning
                     Content</h3>
                 <p class="text-gray-600">
-                    Our education section is free for everyone, and even includes some practice quizzes.
+                    Our learning section is free for everyone, and even includes some practice quizzes.
                 </p>
             </div>
 
@@ -63,12 +63,12 @@
                 class="bg-white border border-gray-200 rounded-2xl shadow-lg p-6 transform hover:scale-105 transition duration-300 group">
                 <div
                     class="bg-purple-100 rounded-full p-4 inline-flex mb-4 group-hover:bg-purple-200 transition-colors">
-                    <img src="{{ asset('icons8-performance-goal-48.png') }}" />
+                    <img src="{{ asset('icons8-performance-goal-48.png') }}" alt="performance-icon" />
                 </div>
                 <h3 class="text-xl font-semibold mb-2 group-hover:text-purple-600 transition-colors">Performance
                     Analytics</h3>
                 <p class="text-gray-600">
-                    Deep‑dive dashboards track your progress over time—spot trends, strengths, and areas to improve.
+                    Deep‑dive dashboards track your progress over time—spot trends, strengths, and areas to improve. <b>Coming soon!</b>
                 </p>
             </div>
 
@@ -89,7 +89,7 @@
                 <!-- Card: Pay‑As‑You‑Go Credits -->
                 <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 flex flex-col">
                     <div class="mb-6">
-                        <img src="{{ asset('icons8-saving-64.png') }}" class="h-12 w-12 mx-auto"/>
+                        <img src="{{ asset('icons8-saving-64.png') }}" alt="savings-icon" class="h-12 w-12 mx-auto"/>
 
                     </div>
                     <h3 class="text-2xl font-semibold mb-2">Pay‑As‑You‑Go Credits</h3>
@@ -118,7 +118,7 @@
                 <!-- Card: Premium Subscription -->
                 <div class="bg-white border border-gray-200 rounded-2xl shadow-lg p-8 flex flex-col">
                     <div class="mb-6">
-                        <img src="{{ asset('icons8-premium-membership-48.png') }}" class="h-12 w-12 mx-auto"/>
+                        <img src="{{ asset('icons8-premium-membership-48.png') }}" alt="premium-icon" class="h-12 w-12 mx-auto"/>
 
                     </div>
                     <h3 class="text-2xl font-semibold mb-2">Premium Subscription</h3>
