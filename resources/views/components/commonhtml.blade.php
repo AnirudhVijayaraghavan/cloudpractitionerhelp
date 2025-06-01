@@ -20,7 +20,7 @@
 
     <!-- New meta description for SEO / social previews -->
     <meta name="description"
-        content="CloudPractitionerHelp is quiz generation web application provides concise, hands-on AWS Certified Cloud Practitioner (CLF-C02) free study modules for learning, affordable and free credits for quizzes, to help you pass the exam with confidence.">
+        content="CloudPractitionerHelp is a quiz web app providing free AWS study modules for learning, and credits for quizzes, to help you pass the exam with confidence.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />

@@ -5,7 +5,7 @@
             <div class="container mx-auto px-6 py-4 flex items-center justify-between">
                 <div>
                     <a wire:navigate class="flex items-center text-gray-800" href="/">
-                        <img src="{{ asset('favicon-32x32.png') }}" class="h-8 w-8" />
+                        <img src="{{ asset('favicon-32x32.png') }}" alt="favicon-logo" class="h-8 w-8" />
 
                         <span class="ml-2 text-2xl font-bold hidden sm:inline">
                             CloudPractitionerHelp
